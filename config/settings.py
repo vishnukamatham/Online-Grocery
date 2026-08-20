@@ -34,6 +34,7 @@ INSTALLED_APPS = [
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
+    'whitenoise.middleware.WhiteNoiseMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
@@ -71,6 +72,13 @@ DATABASES = {
     }
 }
 
+import dj_database_url
+if os.environ.get('DATABASE_URL'):
+    DATABASES['default'] = dj_database_url.config(
+        conn_max_age=600,
+        ssl_require=True
+    )
+
 # Password validation
 AUTH_PASSWORD_VALIDATORS = [
     {'NAME': 'django.contrib.auth.password_validation.UserAttributeSimilarityValidator'},
@@ -89,6 +97,18 @@ USE_TZ = True
 STATIC_URL = '/static/'
 STATICFILES_DIRS = [BASE_DIR / 'static']
 STATIC_ROOT = BASE_DIR / 'staticfiles'
+
+# WhiteNoise static storage caching/compression config
+STORAGES = {
+    "default": {
+        "BACKEND": "django.core.files.storage.FileSystemStorage",
+    },
+    "staticfiles": {
+        "BACKEND": "whitenoise.storage.CompressedManifestStaticFilesStorage",
+    },
+}
+
+WHITENOISE_MANIFEST_STRICT = False
 
 # Media files (uploaded images)
 MEDIA_URL = '/media/'
@@ -113,21 +133,21 @@ MESSAGE_TAGS = {
 }
 
 # ── Razorpay Payment Gateway ──
-RAZORPAY_KEY_ID     = os.environ.get('RAZORPAY_KEY_ID', 'rzp_test_TOMscO0YZtJzzS')
-RAZORPAY_KEY_SECRET = os.environ.get('RAZORPAY_KEY_SECRET', 'cmuTM2fOGhm9q9oPZv7zNPDy')
+RAZORPAY_KEY_ID     = os.environ.get('RAZORPAY_KEY_ID', '')
+RAZORPAY_KEY_SECRET = os.environ.get('RAZORPAY_KEY_SECRET', '')
 
 # ── Gmail SMTP (for Contact Form emails) ──
 EMAIL_BACKEND       = 'django.core.mail.backends.smtp.EmailBackend'
 EMAIL_HOST          = 'smtp.gmail.com'
 EMAIL_PORT          = 587
 EMAIL_USE_TLS       = True
-EMAIL_HOST_USER     = os.environ.get('EMAIL_HOST_USER', 'vishnulovely338@gmail.com')
-EMAIL_HOST_PASSWORD = os.environ.get('EMAIL_HOST_PASSWORD', 'qbdumcjbfeqxkeqs')
+EMAIL_HOST_USER     = os.environ.get('EMAIL_HOST_USER', '')
+EMAIL_HOST_PASSWORD = os.environ.get('EMAIL_HOST_PASSWORD', '')
 DEFAULT_FROM_EMAIL  = f"Grocery Online <{EMAIL_HOST_USER}>"
 CONTACT_EMAIL       = os.environ.get('CONTACT_EMAIL', EMAIL_HOST_USER)
 CONTACT_PHONE       = '+91 83320 20246'
 CONTACT_ADDRESS     = 'Hyderabad, India'
-GOOGLE_CLIENT_ID    = os.environ.get('GOOGLE_CLIENT_ID', '89759901018-uahfh4u2n967c491f02fo91b4c9l9mag.apps.googleusercontent.com')
+GOOGLE_CLIENT_ID    = os.environ.get('GOOGLE_CLIENT_ID', '')
 
 # ── Jazzmin Admin Dashboard Customization ──
 JAZZMIN_SETTINGS = {
