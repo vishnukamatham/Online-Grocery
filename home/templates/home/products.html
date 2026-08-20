@@ -1,0 +1,104 @@
+{% extends 'home/base.html' %}
+{% load static %}
+
+{% block title %}Products — Grocery Online{% endblock %}
+
+{% block content %}
+<div class="page-header">
+  <div class="container">
+    <h1><i class="fa fa-store"></i> Our Products</h1>
+    <p>{{ products.count }} fresh products available</p>
+  </div>
+</div>
+
+<div class="page-section">
+  <div class="container">
+    <div class="products-layout">
+
+      <!-- ── SIDEBAR ── -->
+      <aside class="sidebar">
+        <h3><i class="fa fa-filter" style="color:var(--primary);"></i> Filter</h3>
+
+        <a href="{% url 'products' %}" class="filter-item {% if not selected_category %}active{% endif %}">
+          <i class="fa fa-th"></i> All Products
+        </a>
+
+        {% for cat in categories %}
+        <a href="{% url 'products' %}?category={{ cat.slug }}" class="filter-item {% if selected_category == cat %}active{% endif %}">
+          <i class="fa fa-tag"></i> {{ cat.name }}
+        </a>
+        {% endfor %}
+
+      </aside>
+
+      <!-- ── PRODUCTS GRID ── -->
+      <div>
+        <div class="products-header">
+          <div>
+            {% if query %}
+            <h3 style="font-family:var(--font-heading);font-weight:700;color:var(--secondary);">
+              Results for "<span style="color:var(--primary);">{{ query }}</span>"
+            </h3>
+            {% elif selected_category %}
+            <h3 style="font-family:var(--font-heading);font-weight:700;color:var(--secondary);">
+              {{ selected_category.name }}
+            </h3>
+            {% else %}
+            <h3 style="font-family:var(--font-heading);font-weight:700;color:var(--secondary);">All Products</h3>
+            {% endif %}
+            <p class="products-count">{{ products.count }} products found</p>
+          </div>
+        </div>
+
+        {% if products %}
+        <div class="grid grid-4" style="grid-template-columns:repeat(3,1fr);">
+          {% for product in products %}
+          <div class="card product-card">
+            {% if product.is_featured %}<span class="product-badge">Featured</span>{% endif %}
+            <a href="{% url 'product_detail' product.pk %}">
+              <div class="product-img">
+                <img src="{{ product.get_image_url }}" alt="{{ product.name }}">
+              </div>
+            </a>
+            <div class="product-info">
+              <h3><a href="{% url 'product_detail' product.pk %}" style="color:var(--secondary);">{{ product.name }}</a></h3>
+              <div class="rating">
+                <i class="fa-solid fa-star"></i> {{ product.rating }}
+                <span class="rating-count">/ 5.0</span>
+              </div>
+              <div class="price">₹{{ product.price }}</div>
+              {% if not product.is_available %}
+              <span class="out-of-stock-badge">Out of Stock</span>
+              {% else %}
+              <div class="product-actions">
+                {% if user.is_authenticated %}
+                <a href="{% url 'add_to_wishlist' product.pk %}" class="btn-icon" title="Add to Wishlist">
+                  <i class="fa-regular fa-heart"></i>
+                </a>
+                <a href="{% url 'add_to_cart' product.pk %}" class="btn-small">
+                  <i class="fa fa-cart-plus"></i> Add
+                </a>
+                {% else %}
+                <a href="{% url 'login' %}" class="btn-icon"><i class="fa-regular fa-heart"></i></a>
+                <a href="{% url 'login' %}" class="btn-small">Buy Now</a>
+                {% endif %}
+              </div>
+              {% endif %}
+            </div>
+          </div>
+          {% endfor %}
+        </div>
+
+        {% else %}
+        <div class="empty-state">
+          <div class="icon">🔍</div>
+          <h3>No Products Found</h3>
+          <p>We couldn't find any products matching your search. Try different keywords.</p>
+          <a href="{% url 'products' %}" class="btn">View All Products</a>
+        </div>
+        {% endif %}
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}

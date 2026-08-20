@@ -1,0 +1,303 @@
+{% extends 'home/base.html' %}
+{% load static %}
+
+{% block title %}Grocery Online — Fresh Organic Fruits & Vegetables{% endblock %}
+
+{% block content %}
+
+<!-- ══ HERO ══ -->
+<section class="hero">
+  <div class="container hero-container">
+    <div class="hero-text">
+      <div class="hero-badge">
+        <i class="fa fa-leaf"></i> 100% Organic &amp; Fresh
+      </div>
+      <h1>Fresh Organic<br><span>Fruits &amp; Vegetables</span><br>In Your City</h1>
+      <p>Bred for a high content of beneficial substances.<br>Our products are all fresh and healthy.</p>
+      <div style="display:flex;gap:16px;flex-wrap:wrap;">
+        <a href="{% url 'products' %}" class="btn"><i class="fa fa-shopping-bag"></i> Shop Now</a>
+        <a href="{% url 'about' %}" class="btn-outline"><i class="fa fa-play-circle"></i> Learn More</a>
+      </div>
+      <div class="hero-stats">
+        <div class="hero-stat"><span class="num">500+</span><span class="label">Products</span></div>
+        <div class="hero-stat"><span class="num">10k+</span><span class="label">Customers</span></div>
+        <div class="hero-stat"><span class="num">4.9★</span><span class="label">Rating</span></div>
+      </div>
+    </div>
+    <div class="hero-image">
+      <img src="{% static 'home/images/fruit-basket.png' %}" alt="Fresh Organic Fruits & Vegetables Basket">
+    </div>
+  </div>
+</section>
+
+<!-- ══ CATEGORIES ══ -->
+<section class="section">
+  <div class="container">
+    <h2 class="section-title">Shop Our Categories</h2>
+    <div class="grid grid-4" style="grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));">
+      {% for cat in categories %}
+      <a href="{% url 'products' %}?category={{ cat.slug }}" class="card category-card">
+        <div style="overflow:hidden;height:180px;border-radius:12px;margin:8px 8px 0 8px;">
+          {% if 'fruit' in cat.slug %}
+          <img src="https://images.unsplash.com/photo-1540420773420-3366772f4999?auto=format&fit=crop&w=400&q=80" alt="{{ cat.name }}" class="category-card-img" style="width:100%;height:100%;object-fit:cover;transition:var(--transition);">
+          {% elif 'dairy' in cat.slug %}
+          <img src="https://images.unsplash.com/photo-1550583724-b2692b85b150?auto=format&fit=crop&w=400&q=80" alt="{{ cat.name }}" class="category-card-img" style="width:100%;height:100%;object-fit:cover;transition:var(--transition);">
+          {% elif 'meat' in cat.slug %}
+          <img src="https://images.unsplash.com/photo-1607623814075-e51df1bdc82f?auto=format&fit=crop&w=400&q=80" alt="{{ cat.name }}" class="category-card-img" style="width:100%;height:100%;object-fit:cover;transition:var(--transition);">
+          {% elif 'bake' in cat.slug %}
+          <img src="https://images.unsplash.com/photo-1509440159596-0249088772ff?auto=format&fit=crop&w=400&q=80" alt="{{ cat.name }}" class="category-card-img" style="width:100%;height:100%;object-fit:cover;transition:var(--transition);">
+          {% elif 'beverage' in cat.slug %}
+          <img src="https://images.unsplash.com/photo-1513558161293-cdaf765ed2fd?auto=format&fit=crop&w=400&q=80" alt="{{ cat.name }}" class="category-card-img" style="width:100%;height:100%;object-fit:cover;transition:var(--transition);">
+          {% elif 'snack' in cat.slug %}
+          <img src="https://images.unsplash.com/photo-1569691899455-88464f6d3ab1?auto=format&fit=crop&w=400&q=80" alt="{{ cat.name }}" class="category-card-img" style="width:100%;height:100%;object-fit:cover;transition:var(--transition);">
+          {% elif 'staple' in cat.slug %}
+          <img src="https://images.unsplash.com/photo-1474979266404-7eaacbcd87c5?auto=format&fit=crop&w=400&q=80" alt="{{ cat.name }}" class="category-card-img" style="width:100%;height:100%;object-fit:cover;transition:var(--transition);">
+          {% elif 'sweet' in cat.slug %}
+          <img src="https://images.unsplash.com/photo-1511018556340-d16986a1c194?auto=format&fit=crop&w=400&q=80" alt="{{ cat.name }}" class="category-card-img" style="width:100%;height:100%;object-fit:cover;transition:var(--transition);">
+          {% else %}
+          <img src="https://images.unsplash.com/photo-1542838132-92c53300491e?auto=format&fit=crop&w=400&q=80" alt="{{ cat.name }}" class="category-card-img" style="width:100%;height:100%;object-fit:cover;transition:var(--transition);">
+          {% endif %}
+        </div>
+        <div class="category-card-body">
+          <span class="category-card-icon">
+            {% if 'fruit' in cat.slug %}🍎
+            {% elif 'dairy' in cat.slug %}🥛
+            {% elif 'meat' in cat.slug %}🐟
+            {% elif 'bake' in cat.slug %}🍞
+            {% elif 'beverage' in cat.slug %}🥤
+            {% elif 'snack' in cat.slug %}🍿
+            {% elif 'staple' in cat.slug %}🌾
+            {% elif 'sweet' in cat.slug %}🍫
+            {% else %}📦{% endif %}
+          </span>
+          <h3>{{ cat.name }}</h3>
+          <p>{{ cat.description|default:"Farm-fresh curated selections" }}</p>
+          <span class="cat-link" style="color:var(--primary);font-weight:600;">Shop Now <i class="fa fa-arrow-right"></i></span>
+        </div>
+      </a>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+
+<!-- ══ OUR VALUES ══ -->
+<section class="section bg-light">
+  <div class="container">
+    <h2 class="section-title">Our Value</h2>
+    <div class="grid grid-4">
+      <div class="card value-card">
+        <span class="value-icon">❤️</span>
+        <h3>Trust</h3>
+        <p>We are committed to providing the most reliable and trustworthy grocery service in your city.</p>
+      </div>
+      <div class="card value-card">
+        <span class="value-icon">🛡️</span>
+        <h3>Food Safety</h3>
+        <p>All our products follow the highest food safety standards. Your health is our priority.</p>
+      </div>
+      <div class="card value-card">
+        <span class="value-icon">🚚</span>
+        <h3>Fast Delivery</h3>
+        <p>Get your groceries delivered to your doorstep within hours. Fresh and on time, every time.</p>
+      </div>
+      <div class="card value-card">
+        <span class="value-icon">🌿</span>
+        <h3>100% Organic</h3>
+        <p>We source only certified organic products directly from trusted farms near your city.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ FEATURED PRODUCTS ══ -->
+<section class="section">
+  <div class="container">
+    <h2 class="section-title">Featured Products</h2>
+    {% if featured_products %}
+    <div class="grid grid-4">
+      {% for product in featured_products %}
+      <div class="card product-card">
+        {% if product.is_featured %}<span class="product-badge">Featured</span>{% endif %}
+        <div class="product-img">
+          <img src="{{ product.get_image_url }}" alt="{{ product.name }}">
+        </div>
+        <div class="product-info">
+          <h3>{{ product.name }}</h3>
+          <div class="rating">
+            {% for i in "12345" %}
+              {% if forloop.counter <= product.rating|floatformat:"0"|add:"0" %}
+              <i class="fa-solid fa-star"></i>
+              {% else %}
+              <i class="fa-regular fa-star"></i>
+              {% endif %}
+            {% endfor %}
+            <span class="rating-count">({{ product.rating }})</span>
+          </div>
+          <div class="price">₹{{ product.price }}</div>
+          <div class="product-actions">
+            {% if user.is_authenticated %}
+            <a href="{% url 'add_to_wishlist' product.pk %}" class="btn-icon" title="Add to Wishlist">
+              <i class="fa-regular fa-heart"></i>
+            </a>
+            <a href="{% url 'add_to_cart' product.pk %}" class="btn-small">
+              <i class="fa fa-cart-plus"></i> Add to Cart
+            </a>
+            {% else %}
+            <a href="{% url 'login' %}" class="btn-icon" title="Login to Wishlist">
+              <i class="fa-regular fa-heart"></i>
+            </a>
+            <a href="{% url 'login' %}" class="btn-small">Buy Now</a>
+            {% endif %}
+          </div>
+        </div>
+      </div>
+      {% endfor %}
+    </div>
+    {% else %}
+    <!-- Hardcoded placeholder products when no DB products exist -->
+    <div class="grid grid-4">
+      <div class="card product-card">
+        <div class="product-img">
+          <img src="https://images.unsplash.com/photo-1550583724-b2692b85b150?auto=format&fit=crop&w=300&q=80" alt="Fresh Milk">
+        </div>
+        <div class="product-info">
+          <h3>Fresh Milk</h3>
+          <div class="rating"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i></div>
+          <div class="price">₹60.00</div>
+          <div class="product-actions">
+            <a href="{% url 'login' %}" class="btn-icon"><i class="fa-regular fa-heart"></i></a>
+            <a href="{% url 'login' %}" class="btn-small">Buy Now</a>
+          </div>
+        </div>
+      </div>
+      <div class="card product-card">
+        <div class="product-img">
+          <img src="https://images.unsplash.com/photo-1596797038530-2c107229654b?auto=format&fit=crop&w=300&q=80" alt="Paneer">
+        </div>
+        <div class="product-info">
+          <h3>Paneer</h3>
+          <div class="rating"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i></div>
+          <div class="price">₹120.00</div>
+          <div class="product-actions">
+            <a href="{% url 'login' %}" class="btn-icon"><i class="fa-regular fa-heart"></i></a>
+            <a href="{% url 'login' %}" class="btn-small">Buy Now</a>
+          </div>
+        </div>
+      </div>
+      <div class="card product-card">
+        <div class="product-img">
+          <img src="https://images.unsplash.com/photo-1582722872445-44dc5f7e3c8f?auto=format&fit=crop&w=300&q=80" alt="Eggs">
+        </div>
+        <div class="product-info">
+          <h3>Fresh Eggs</h3>
+          <div class="rating"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i></div>
+          <div class="price">₹90.00</div>
+          <div class="product-actions">
+            <a href="{% url 'login' %}" class="btn-icon"><i class="fa-regular fa-heart"></i></a>
+            <a href="{% url 'login' %}" class="btn-small">Buy Now</a>
+          </div>
+        </div>
+      </div>
+      <div class="card product-card">
+        <div class="product-img">
+          <img src="https://images.unsplash.com/photo-1542838132-92c53300491e?auto=format&fit=crop&w=300&q=80" alt="Fresh Vegetables">
+        </div>
+        <div class="product-info">
+          <h3>Fresh Veggies</h3>
+          <div class="rating"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i></div>
+          <div class="price">₹50.00</div>
+          <div class="product-actions">
+            <a href="{% url 'login' %}" class="btn-icon"><i class="fa-regular fa-heart"></i></a>
+            <a href="{% url 'login' %}" class="btn-small">Buy Now</a>
+          </div>
+        </div>
+      </div>
+    </div>
+    {% endif %}
+    <div class="view-all-wrapper">
+      <a href="{% url 'products' %}" class="btn">
+        <i class="fa fa-th"></i> View All Products
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- ══ TESTIMONIALS ══ -->
+<section class="section bg-light">
+  <div class="container">
+    <h2 class="section-title">What Our Customers Say</h2>
+    <div class="grid grid-3">
+      <div class="card testimonial-card">
+        <div class="customer-icon"><i class="fa fa-user"></i></div>
+        <h3>Rahul</h3>
+        <div class="rating">
+          <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+        </div>
+        <p>"Amazing quality and very fresh vegetables. The delivery was also very fast. Will definitely order again!"</p>
+      </div>
+      <div class="card testimonial-card">
+        <div class="customer-icon"><i class="fa fa-user"></i></div>
+        <h3>Priya</h3>
+        <div class="rating">
+          <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+        </div>
+        <p>"I really loved the quality of the fruits. Everything arrived fresh and properly packed. Excellent service!"</p>
+      </div>
+      <div class="card testimonial-card">
+        <div class="customer-icon"><i class="fa fa-user"></i></div>
+        <h3>Arjun</h3>
+        <div class="rating">
+          <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+        </div>
+        <p>"Great grocery shopping experience. The prices are reasonable and delivery is quick. Highly recommended!"</p>
+      </div>
+      <div class="card testimonial-card">
+        <div class="customer-icon"><i class="fa fa-user"></i></div>
+        <h3>Sneha</h3>
+        <div class="rating">
+          <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+        </div>
+        <p>"The customer service is outstanding! I had a small delivery issue and they resolved it in less than 5 minutes. The organic fruits are top-notch."</p>
+      </div>
+      <div class="card testimonial-card">
+        <div class="customer-icon"><i class="fa fa-user"></i></div>
+        <h3>Vikram</h3>
+        <div class="rating">
+          <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+        </div>
+        <p>"Very convenient app. The milk and dairy products are always delivered fresh. Delivery is prompt and packaging is neat."</p>
+      </div>
+      <div class="card testimonial-card">
+        <div class="customer-icon"><i class="fa fa-user"></i></div>
+        <h3>Anjali</h3>
+        <div class="rating">
+          <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+        </div>
+        <p>"I love that they use biodegradable packaging! It's so hard to find stores that care about plastic waste. And the leafy greens are extremely fresh!"</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ BANNER CTA ══ -->
+<section class="section" style="background: linear-gradient(135deg, var(--primary), var(--primary-dark)); color: white; padding: 60px 0;">
+  <div class="container text-center">
+    <h2 style="font-family: var(--font-heading); font-size: 2rem; margin-bottom: 12px; color: white;">
+      🌿 Fresh Deals Every Day!
+    </h2>
+    <p style="font-size: 1.05rem; margin-bottom: 28px; opacity: 0.9;">
+      Register now and get 10% off your first order. Fresh groceries, unbeatable prices.
+    </p>
+    {% if not user.is_authenticated %}
+    <a href="{% url 'register' %}" class="btn" style="background: white; color: var(--primary); border: 2px solid white;">
+      <i class="fa fa-user-plus"></i> Join For Free
+    </a>
+    {% else %}
+    <a href="{% url 'products' %}" class="btn" style="background: white; color: var(--primary); border: 2px solid white;">
+      <i class="fa fa-shopping-bag"></i> Shop Now
+    </a>
+    {% endif %}
+  </div>
+</section>
+
+{% endblock %}

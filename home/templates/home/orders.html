@@ -1,0 +1,61 @@
+{% extends 'home/base.html' %}
+
+{% block title %}My Orders — Grocery Online{% endblock %}
+
+{% block content %}
+<div class="page-header">
+  <div class="container">
+    <h1><i class="fa fa-box"></i> My Orders</h1>
+    <p>Track all your orders here</p>
+  </div>
+</div>
+
+<div class="page-section">
+  <div class="container">
+    {% if orders %}
+      {% for order in orders %}
+      <div class="order-card">
+        <div class="order-header">
+          <div>
+            <div class="order-id">Order #{{ order.id }}</div>
+            <div style="font-size:0.85rem;color:var(--text-muted);">
+              <i class="fa fa-calendar"></i> {{ order.created_at|date:"d M Y, h:i A" }}
+            </div>
+          </div>
+          <span class="status-badge status-{{ order.status }}">{{ order.get_status_display }}</span>
+        </div>
+
+        <!-- Items -->
+        <div style="margin-bottom:16px;">
+          {% for item in order.items.all %}
+          <div style="display:flex;justify-content:space-between;align-items:center;padding:8px 0;border-bottom:1px solid var(--gray-light);">
+            <span style="font-size:0.92rem;">{{ item.product_name }} × {{ item.quantity }}</span>
+            <span style="font-weight:600;color:var(--primary);">₹{{ item.get_subtotal }}</span>
+          </div>
+          {% endfor %}
+        </div>
+
+        <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px;">
+          <div>
+            <span style="font-size:0.9rem;color:var(--text-muted);">Total: </span>
+            <span style="font-family:var(--font-heading);font-size:1.2rem;font-weight:700;color:var(--primary);">₹{{ order.total_amount }}</span>
+          </div>
+          <a href="{% url 'order_detail' order.pk %}" class="btn-outline" style="padding:10px 20px;">
+            <i class="fa fa-eye"></i> View Details
+          </a>
+        </div>
+      </div>
+      {% endfor %}
+    {% else %}
+    <div class="empty-state">
+      <div class="icon">📦</div>
+      <h3>No Orders Yet</h3>
+      <p>You haven't placed any orders yet. Start shopping to see your orders here.</p>
+      <a href="{% url 'products' %}" class="btn">
+        <i class="fa fa-shopping-bag"></i> Shop Now
+      </a>
+    </div>
+    {% endif %}
+  </div>
+</div>
+{% endblock %}

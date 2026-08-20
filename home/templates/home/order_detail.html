@@ -1,0 +1,220 @@
+{% extends 'home/base.html' %}
+
+{% block title %}Order #{{ order.id }} — Grocery Online{% endblock %}
+
+{% block content %}
+<div class="page-header">
+  <div class="container">
+    <h1><i class="fa fa-check-circle" style="color:#28a745;"></i> Order Confirmed!</h1>
+    <p>Your order has been placed successfully.</p>
+  </div>
+</div>
+
+<div class="page-section">
+  <div class="container" style="max-width:780px;">
+
+    <!-- Order Summary Card -->
+    <div class="card" style="padding:36px;margin-bottom:24px;">
+      <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:16px;margin-bottom:28px;padding-bottom:20px;border-bottom:2px solid var(--light2);">
+        <div>
+          <h2 style="font-family:var(--font-heading);font-size:1.5rem;font-weight:800;color:var(--secondary);">
+            Order #{{ order.id }}
+          </h2>
+          <p style="color:var(--text-muted);font-size:0.88rem;">
+            <i class="fa fa-calendar"></i> Placed on {{ order.created_at|date:"d M Y, h:i A" }}
+          </p>
+        </div>
+        <span class="status-badge status-{{ order.status }}">{{ order.get_status_display }}</span>
+      </div>
+
+      <!-- Stepper Progress Tracker -->
+      <div class="order-stepper-container" style="margin-bottom:32px;padding:24px 16px;background:#f8fafc;border-radius:16px;border:1px solid #e2e8f0;">
+        {% if order.status == 'cancelled' %}
+          <div style="display:flex;align-items:center;justify-content:center;gap:12px;color:#dc3545;padding:10px 0;">
+            <div style="width:48px;height:48px;border-radius:50%;background:#ffebeb;display:flex;align-items:center;justify-content:center;border:2px solid #dc3545;font-size:1.3rem;">
+              <i class="fa fa-times-circle"></i>
+            </div>
+            <div>
+              <div style="font-weight:700;font-size:1.15rem;color:#dc3545;">Order Cancelled</div>
+              <div style="font-size:0.88rem;color:#64748b;">This order has been cancelled and will not be processed.</div>
+            </div>
+          </div>
+        {% else %}
+          <div style="display:flex;justify-content:space-between;position:relative;margin-top:15px;margin-bottom:5px;">
+            <!-- Connector Line -->
+            <div style="position:absolute;top:18px;left:6%;right:6%;height:4px;background:#e2e8f0;z-index:1;">
+              <div id="stepper-progress-bar" style="height:100%;background:var(--primary);transition:width 0.4s ease;width: {% if order.status == 'pending' %}0%{% elif order.status == 'confirmed' %}33.33%{% elif order.status == 'shipped' %}66.66%{% elif order.status == 'delivered' %}100%{% endif %};"></div>
+            </div>
+
+            <!-- Step 1: Placed -->
+            <div class="step-item" style="text-align:center;width:22%;z-index:2;position:relative;">
+              <div class="step-circle" style="width:40px;height:40px;border-radius:50%;background:var(--primary);color:white;display:flex;align-items:center;justify-content:center;margin:0 auto 10px;font-weight:bold;border:4px solid #fff;box-shadow:0 0 0 2px var(--primary);transition:all 0.3s;">
+                <i class="fa fa-shopping-basket" style="font-size:0.85rem;"></i>
+              </div>
+              <div class="step-label" style="font-weight:700;font-size:0.85rem;color:#0f172a;">Placed</div>
+              <div style="font-size:0.72rem;color:#64748b;">{{ order.created_at|date:"d M, h:i A" }}</div>
+            </div>
+
+            <!-- Step 2: Confirmed -->
+            <div class="step-item" style="text-align:center;width:22%;z-index:2;position:relative;">
+              <div class="step-circle" style="width:40px;height:40px;border-radius:50%;background:{% if order.status != 'pending' %}var(--primary){% else %}#ffffff{% endif %};color:{% if order.status != 'pending' %}#ffffff{% else %}#94a3b8{% endif %};display:flex;align-items:center;justify-content:center;margin:0 auto 10px;font-weight:bold;border:4px solid #fff;box-shadow:0 0 0 2px {% if order.status != 'pending' %}var(--primary){% else %}#cbd5e1{% endif %};transition:all 0.3s;">
+                <i class="fa fa-check-circle" style="font-size:0.85rem;"></i>
+              </div>
+              <div class="step-label" style="font-weight:{% if order.status != 'pending' %}700{% else %}500{% endif %};font-size:0.85rem;color:{% if order.status != 'pending' %}#0f172a{% else %}#64748b{% endif %};">Confirmed</div>
+            </div>
+
+            <!-- Step 3: Shipped -->
+            <div class="step-item" style="text-align:center;width:22%;z-index:2;position:relative;">
+              <div class="step-circle" style="width:40px;height:40px;border-radius:50%;background:{% if order.status == 'shipped' or order.status == 'delivered' %}var(--primary){% else %}#ffffff{% endif %};color:{% if order.status == 'shipped' or order.status == 'delivered' %}#ffffff{% else %}#94a3b8{% endif %};display:flex;align-items:center;justify-content:center;margin:0 auto 10px;font-weight:bold;border:4px solid #fff;box-shadow:0 0 0 2px {% if order.status == 'shipped' or order.status == 'delivered' %}var(--primary){% else %}#cbd5e1{% endif %};transition:all 0.3s;">
+                <i class="fa fa-truck" style="font-size:0.85rem;"></i>
+              </div>
+              <div class="step-label" style="font-weight:{% if order.status == 'shipped' or order.status == 'delivered' %}700{% else %}500{% endif %};font-size:0.85rem;color:{% if order.status == 'shipped' or order.status == 'delivered' %}#0f172a{% else %}#64748b{% endif %};">Shipped</div>
+            </div>
+
+            <!-- Step 4: Delivered -->
+            <div class="step-item" style="text-align:center;width:22%;z-index:2;position:relative;">
+              <div class="step-circle" style="width:40px;height:40px;border-radius:50%;background:{% if order.status == 'delivered' %}var(--primary){% else %}#ffffff{% endif %};color:{% if order.status == 'delivered' %}#ffffff{% else %}#94a3b8{% endif %};display:flex;align-items:center;justify-content:center;margin:0 auto 10px;font-weight:bold;border:4px solid #fff;box-shadow:0 0 0 2px {% if order.status == 'delivered' %}var(--primary){% else %}#cbd5e1{% endif %};transition:all 0.3s;">
+                <i class="fa fa-home" style="font-size:0.85rem;"></i>
+              </div>
+              <div class="step-label" style="font-weight:{% if order.status == 'delivered' %}700{% else %}500{% endif %};font-size:0.85rem;color:{% if order.status == 'delivered' %}#0f172a{% else %}#64748b{% endif %};">Delivered</div>
+            </div>
+          </div>
+        {% endif %}
+      </div>
+
+      {% if order.can_cancel %}
+      <div id="cancel-timer-alert" style="margin-bottom:24px;padding:14px 18px;background-color:#fff5f5;border:1px solid #fed7d7;border-radius:12px;color:#c53030;font-size:0.92rem;display:flex;align-items:center;gap:10px;font-weight:500;">
+        <i class="fa fa-clock" style="font-size:1.15rem;color:#e53e3e;"></i>
+        <span>You can cancel this order within the next <strong id="cancel-timer" style="font-size:1.05rem;color:#e53e3e;">--:--</strong> minutes.</span>
+      </div>
+      {% endif %}
+
+      <!-- Items -->
+      <h3 style="font-family:var(--font-heading);font-size:1.1rem;font-weight:700;margin-bottom:16px;color:var(--secondary);">
+        <i class="fa fa-box" style="color:var(--primary);"></i> Order Items
+      </h3>
+      {% for item in order.items.all %}
+      <div style="display:flex;justify-content:space-between;align-items:center;padding:14px 0;border-bottom:1px solid var(--gray-light);">
+        <div>
+          <div style="font-weight:600;color:var(--secondary);">{{ item.product_name }}</div>
+          <div style="font-size:0.82rem;color:var(--text-muted);">Qty: {{ item.quantity }} × ₹{{ item.price }}</div>
+        </div>
+        <div style="font-weight:700;color:var(--primary);">₹{{ item.get_subtotal }}</div>
+      </div>
+      {% endfor %}
+
+      <!-- Pricing Summary Breakdown -->
+      <div style="margin-top:20px;padding-top:16px;border-top:2px solid var(--gray-light);display:flex;flex-direction:column;gap:8px;">
+        <div style="display:flex;justify-content:space-between;font-size:0.95rem;color:var(--text-muted);">
+          <span>Subtotal</span>
+          <span>₹{{ order.get_subtotal }}</span>
+        </div>
+        {% if order.discount_amount > 0 %}
+        <div style="display:flex;justify-content:space-between;font-size:0.95rem;color:#28a745;font-weight:600;">
+          <span>Discount {% if order.coupon %}({{ order.coupon.code }}){% endif %}</span>
+          <span>- ₹{{ order.discount_amount }}</span>
+        </div>
+        {% endif %}
+        <div style="display:flex;justify-content:space-between;font-size:0.95rem;color:var(--text-muted);">
+          <span>Delivery Charge</span>
+          {% if order.delivery_charge > 0 %}
+          <span style="color:var(--secondary);font-weight:600;">₹{{ order.delivery_charge }}</span>
+          {% else %}
+          <span style="color:var(--success);font-weight:600;">FREE</span>
+          {% endif %}
+        </div>
+        <div style="display:flex;justify-content:space-between;margin-top:8px;padding-top:12px;border-top:1px solid var(--gray-light);">
+          <span style="font-size:1.1rem;font-weight:700;color:var(--secondary);">Total Amount</span>
+          <span style="font-family:var(--font-heading);font-size:1.4rem;font-weight:800;color:var(--primary);">₹{{ order.total_amount }}</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Delivery Info -->
+    <div class="card" style="padding:28px;margin-bottom:24px;">
+      <h3 style="font-family:var(--font-heading);font-size:1.1rem;font-weight:700;margin-bottom:16px;color:var(--secondary);">
+        <i class="fa fa-map-marker-alt" style="color:var(--primary);"></i> Delivery Information
+      </h3>
+      <div class="grid grid-2">
+        <div>
+          <p style="font-size:0.88rem;color:var(--text-muted);">Name</p>
+          <p style="font-weight:600;">{{ order.full_name }}</p>
+        </div>
+        <div>
+          <p style="font-size:0.88rem;color:var(--text-muted);">Email</p>
+          <p style="font-weight:600;">{{ order.email }}</p>
+        </div>
+        <div>
+          <p style="font-size:0.88rem;color:var(--text-muted);">Phone</p>
+          <p style="font-weight:600;">{{ order.phone }}</p>
+        </div>
+        <div>
+          <p style="font-size:0.88rem;color:var(--text-muted);">Pincode</p>
+          <p style="font-weight:600;">{{ order.pincode }}</p>
+        </div>
+        <div style="grid-column:1/-1;">
+          <p style="font-size:0.88rem;color:var(--text-muted);">Delivery Address</p>
+          <p style="font-weight:600;">{{ order.address }}, {{ order.city }}, {{ order.state }}</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Actions -->
+    <div style="display:flex;gap:14px;flex-wrap:wrap;align-items:center;">
+      <a href="{% url 'orders' %}" class="btn-outline">
+        <i class="fa fa-list"></i> All Orders
+      </a>
+      <a href="{% url 'products' %}" class="btn">
+        <i class="fa fa-shopping-bag"></i> Continue Shopping
+      </a>
+      {% if order.can_cancel %}
+      <div id="cancel-order-btn-container" style="display:inline-block;">
+        <form method="POST" action="{% url 'cancel_order' order.pk %}" style="margin:0;" onsubmit="return confirm('Are you sure you want to cancel this order?');">
+          {% csrf_token %}
+          <button type="submit" class="btn btn-danger" style="background-color:#dc3545;border:none;color:white;display:inline-flex;align-items:center;gap:8px;padding:12px 24px;border-radius:12px;font-weight:600;font-size:0.95rem;cursor:pointer;transition:all 0.2s;">
+            <i class="fa fa-times-circle"></i> Cancel Order
+          </button>
+        </form>
+      </div>
+      {% endif %}
+    </div>
+
+  </div>
+</div>
+
+{% if order.can_cancel %}
+<script>
+  (function() {
+    var timerEl = document.getElementById('cancel-timer');
+    var alertEl = document.getElementById('cancel-timer-alert');
+    var btnContainer = document.getElementById('cancel-order-btn-container');
+    var remainingSeconds = {{ remaining_seconds|default:0 }};
+    
+    function updateTimer() {
+      if (remainingSeconds <= 0) {
+        if (alertEl) alertEl.style.display = 'none';
+        if (btnContainer) btnContainer.style.display = 'none';
+        // Reload page to reflect confirmed status
+        window.location.reload();
+        return;
+      }
+      
+      var minutes = Math.floor(remainingSeconds / 60);
+      var seconds = remainingSeconds % 60;
+      seconds = seconds < 10 ? '0' + seconds : seconds;
+      timerEl.textContent = minutes + ":" + seconds;
+      
+      remainingSeconds--;
+      setTimeout(updateTimer, 1000);
+    }
+    
+    if (remainingSeconds > 0) {
+      updateTimer();
+    } else {
+      if (alertEl) alertEl.style.display = 'none';
+      if (btnContainer) btnContainer.style.display = 'none';
+    }
+  })();
+</script>
+{% endif %}
+{% endblock %}

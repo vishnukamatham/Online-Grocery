@@ -1,0 +1,91 @@
+{% extends 'home/base.html' %}
+
+{% block title %}Create Account — Grocery Online{% endblock %}
+
+{% block content %}
+<section class="auth-section">
+  <div class="container">
+    <div class="auth-card">
+      <div style="text-align:center;margin-bottom:20px;">
+        <div style="font-size:3rem;">🛒</div>
+      </div>
+      <h2>Create Account</h2>
+      <p class="subtitle">Join Grocery Online and start shopping fresh!</p>
+
+      <form method="POST" action="{% url 'register' %}">
+        {% csrf_token %}
+        <div class="form-row">
+          <div class="form-group">
+            <label for="first_name">First Name</label>
+            <input type="text" id="first_name" name="first_name" class="form-control" placeholder="Your first name" required>
+          </div>
+          <div class="form-group">
+            <label for="last_name">Last Name</label>
+            <input type="text" id="last_name" name="last_name" class="form-control" placeholder="Your last name">
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="username">Username</label>
+          <input type="text" id="username" name="username" class="form-control" placeholder="Choose a username" required>
+        </div>
+        <div class="form-group">
+          <label for="email">Email Address</label>
+          <input type="email" id="email" name="email" class="form-control" placeholder="your@email.com" required>
+        </div>
+        <div class="form-group">
+          <label for="password1">Password</label>
+          <div style="position:relative;">
+            <input type="password" id="password1" name="password1" class="form-control" placeholder="Min. 8 characters" required>
+            <button type="button" class="toggle-password" data-target="password1"
+              style="position:absolute;right:14px;top:50%;transform:translateY(-50%);background:none;border:none;color:var(--text-muted);cursor:pointer;">
+              <i class="fa fa-eye"></i>
+            </button>
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="password2">Confirm Password</label>
+          <input type="password" id="password2" name="password2" class="form-control" placeholder="Repeat your password" required>
+        </div>
+        <button type="submit" class="btn w-100" style="justify-content:center;margin-top:8px;">
+          <i class="fa fa-user-plus"></i> Create Account
+        </button>
+      </form>
+
+      <!-- Divider -->
+      <div style="display:flex; align-items:center; margin:20px 0; text-align:center; color:var(--text-muted); font-size:0.88rem;">
+        <hr style="flex:1; border:none; border-top:1px solid var(--gray-light);">
+        <span style="padding:0 10px;">or</span>
+        <hr style="flex:1; border:none; border-top:1px solid var(--gray-light);">
+      </div>
+
+      <!-- Google Sign In Button Container -->
+      <div style="display: flex; justify-content: center; margin-top: 10px;">
+        <div id="g_id_onload"
+             data-client_id="{{ google_client_id }}"
+             data-context="signup"
+             data-ux_mode="redirect"
+             data-login_uri="{{ request.scheme }}://{{ request.get_host }}{% url 'google_callback' %}"
+             data-auto_prompt="false">
+        </div>
+        <div class="g_id_signin"
+             data-type="standard"
+             data-shape="pill"
+             data-theme="outline"
+             data-text="signup_with"
+             data-size="large"
+             data-logo_alignment="left"
+             data-width="300">
+        </div>
+      </div>
+
+      <div class="auth-link" style="margin-top:20px;">
+        Already have an account? <a href="{% url 'login' %}">Login here</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+{% block extra_js %}
+<script src="https://accounts.google.com/gsi/client" async defer></script>
+{% endblock %}
+{% endblock %}

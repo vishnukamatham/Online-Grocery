@@ -1,0 +1,113 @@
+{% extends 'home/base.html' %}
+{% load static %}
+
+{% block title %}{{ product.name }} — Grocery Online{% endblock %}
+
+{% block content %}
+<div class="page-section">
+  <div class="container">
+
+    <!-- Breadcrumb -->
+    <div class="breadcrumb">
+      <a href="{% url 'home' %}">Home</a>
+      <span><i class="fa fa-chevron-right" style="font-size:0.7rem;"></i></span>
+      <a href="{% url 'products' %}">Products</a>
+      <span><i class="fa fa-chevron-right" style="font-size:0.7rem;"></i></span>
+      <span>{{ product.name }}</span>
+    </div>
+
+    <!-- Product Detail Layout -->
+    <div class="product-detail-layout">
+
+      <!-- Image -->
+      <div>
+        <img src="{{ product.get_image_url }}" alt="{{ product.name }}" class="product-detail-img">
+      </div>
+
+      <!-- Info -->
+      <div class="product-detail-info">
+        <p style="color:var(--primary);font-weight:600;font-size:0.9rem;margin-bottom:8px;">
+          {{ product.category.name }}
+        </p>
+        <h1>{{ product.name }}</h1>
+
+        <div class="rating" style="font-size:1rem;margin-bottom:12px;">
+          {% for i in "12345" %}
+            <i class="fa-solid fa-star"></i>
+          {% endfor %}
+          <span style="color:var(--text-muted);font-size:0.9rem;"> {{ product.rating }} / 5.0</span>
+        </div>
+
+        <div class="product-detail-price">₹{{ product.price }}</div>
+
+        <p class="product-detail-desc">{{ product.description|default:"Fresh, high-quality product sourced directly from trusted farms. Our products are 100% organic and delivered fresh to your doorstep." }}</p>
+
+        {% if product.is_available %}
+        <span class="stock-badge in-stock">
+          <i class="fa fa-check-circle"></i> In Stock ({{ product.stock }} available)
+        </span>
+        {% else %}
+        <span class="stock-badge out-of-stock">
+          <i class="fa fa-times-circle"></i> Out of Stock
+        </span>
+        {% endif %}
+
+        {% if product.is_available %}
+        <div class="detail-actions">
+          {% if user.is_authenticated %}
+          <a href="{% url 'add_to_cart' product.pk %}" class="btn">
+            <i class="fa fa-cart-plus"></i> Add to Cart
+          </a>
+          <a href="{% url 'add_to_wishlist' product.pk %}" class="btn-outline {% if in_wishlist %}active{% endif %}">
+            <i class="fa{% if in_wishlist %}-solid{% else %}-regular{% endif %} fa-heart"></i>
+            {% if in_wishlist %}In Wishlist{% else %}Add to Wishlist{% endif %}
+          </a>
+          {% else %}
+          <a href="{% url 'login' %}" class="btn">
+            <i class="fa fa-lock"></i> Login to Buy
+          </a>
+          {% endif %}
+        </div>
+        {% endif %}
+
+        <!-- Features -->
+        <div style="margin-top:28px;padding:20px;background:var(--light2);border-radius:var(--radius-sm);">
+          <div style="display:flex;gap:20px;flex-wrap:wrap;">
+            <span style="font-size:0.88rem;color:var(--text-muted);"><i class="fa fa-truck" style="color:var(--primary);"></i> Free delivery above ₹499</span>
+            <span style="font-size:0.88rem;color:var(--text-muted);"><i class="fa fa-shield-alt" style="color:var(--primary);"></i> 100% Organic</span>
+            <span style="font-size:0.88rem;color:var(--text-muted);"><i class="fa fa-undo" style="color:var(--primary);"></i> Easy returns</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Related Products -->
+    {% if related_products %}
+    <div style="margin-top:60px;">
+      <h2 class="section-title" style="text-align:left;">Related Products</h2>
+      <div class="grid grid-4">
+        {% for rp in related_products %}
+        <div class="card product-card">
+          <a href="{% url 'product_detail' rp.pk %}">
+            <div class="product-img">
+              <img src="{{ rp.get_image_url }}" alt="{{ rp.name }}">
+            </div>
+          </a>
+          <div class="product-info">
+            <h3><a href="{% url 'product_detail' rp.pk %}" style="color:var(--secondary);">{{ rp.name }}</a></h3>
+            <div class="price">₹{{ rp.price }}</div>
+            {% if user.is_authenticated %}
+            <a href="{% url 'add_to_cart' rp.pk %}" class="btn-small w-100" style="text-align:center;display:block;">Add to Cart</a>
+            {% else %}
+            <a href="{% url 'login' %}" class="btn-small w-100" style="text-align:center;display:block;">Buy Now</a>
+            {% endif %}
+          </div>
+        </div>
+        {% endfor %}
+      </div>
+    </div>
+    {% endif %}
+
+  </div>
+</div>
+{% endblock %}

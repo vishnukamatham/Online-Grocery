@@ -1,0 +1,262 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description"
+    content="Grocery Online — Fresh and healthy groceries delivered to your doorstep. Shop fruits, vegetables, dairy, meat and more.">
+  <title>{% block title %}Grocery Online — Fresh Groceries Delivered{% endblock %}</title>
+
+  <!-- Google Fonts -->
+  <link
+    href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Poppins:wght@400;500;600;700;800&display=swap"
+    rel="stylesheet">
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <!-- Main CSS -->
+  <link rel="stylesheet" href="{% static 'home/css/style.css' %}">
+  {% block extra_css %}{% endblock %}
+</head>
+
+<body>
+
+  <!-- ══ FLASH MESSAGES ══ -->
+  {% if messages %}
+  <div class="messages-container">
+    {% for message in messages %}
+    <div class="alert alert-{{ message.tags }}">
+      <span>
+        {% if message.tags == 'success' %}<i class="fa fa-check-circle"></i>{% endif %}
+        {% if message.tags == 'error' %}<i class="fa fa-exclamation-circle"></i>{% endif %}
+        {% if message.tags == 'warning' %}<i class="fa fa-exclamation-triangle"></i>{% endif %}
+        {% if message.tags == 'info' %}<i class="fa fa-info-circle"></i>{% endif %}
+        {{ message }}
+      </span>
+      <span class="close-btn">&times;</span>
+    </div>
+    {% endfor %}
+  </div>
+  {% endif %}
+
+  <!-- ══ NAVBAR ══ -->
+  <nav class="navbar">
+    <div class="nav-container">
+
+      <!-- Logo -->
+      <a href="{% url 'home' %}" class="logo"><i class="fa-solid fa-basket-shopping"></i><span>online</span>Grocery</a>
+
+      <!-- ── DELIVERY LOCATION BUTTON ── -->
+      <div class="delivery-btn-wrapper" id="deliveryWrapper">
+        <button class="delivery-btn" id="deliveryBtn" onclick="toggleLocationDropdown()">
+          <span class="delivery-top"><i class="fa-solid fa-bolt"></i> Delivery in 10 mins</span>
+          <span class="delivery-bottom"><i class="fa-solid fa-location-dot"></i> <span id="selectedLocation">Select
+              Location</span></span>
+        </button>
+
+        <!-- Location Dropdown -->
+        <div class="location-dropdown" id="locationDropdown">
+          <div class="location-dropdown-header">
+            <h3>Select a location for delivery</h3>
+            <button class="location-close" onclick="toggleLocationDropdown()">&times;</button>
+          </div>
+          <p class="location-subtitle">Choose your address location to see <span>product availability</span> and
+            <span>delivery</span> options
+          </p>
+          <div class="location-search">
+            <i class="fa-solid fa-magnifying-glass"></i>
+            <input type="text" id="locationInput" placeholder="Search for area or street name"
+              onkeyup="filterLocations(this.value)">
+          </div>
+          <ul class="location-list" id="locationList">
+            <!-- Hyderabad -->
+            <li class="location-city-heading">📍 Hyderabad</li>
+            <li onclick="selectLocation('Hyderabad, Telangana')"><i class="fa-solid fa-location-dot"></i> Hyderabad,
+              Telangana</li>
+            <li onclick="selectLocation('Secunderabad')"><i class="fa-solid fa-location-dot"></i> Secunderabad</li>
+            <li onclick="selectLocation('Gachibowli')"><i class="fa-solid fa-location-dot"></i> Gachibowli</li>
+            <li onclick="selectLocation('Madhapur')"><i class="fa-solid fa-location-dot"></i> Madhapur</li>
+            <li onclick="selectLocation('Banjara Hills')"><i class="fa-solid fa-location-dot"></i> Banjara Hills</li>
+            <li onclick="selectLocation('Jubilee Hills')"><i class="fa-solid fa-location-dot"></i> Jubilee Hills</li>
+            <li onclick="selectLocation('Kondapur')"><i class="fa-solid fa-location-dot"></i> Kondapur</li>
+            <li onclick="selectLocation('Kukatpally')"><i class="fa-solid fa-location-dot"></i> Kukatpally</li>
+            <!-- Bangalore -->
+            <li class="location-city-heading">📍 Bangalore</li>
+            <li onclick="selectLocation('Koramangala, Bangalore')"><i class="fa-solid fa-location-dot"></i> Koramangala
+            </li>
+            <li onclick="selectLocation('Indiranagar, Bangalore')"><i class="fa-solid fa-location-dot"></i> Indiranagar
+            </li>
+            <li onclick="selectLocation('Whitefield, Bangalore')"><i class="fa-solid fa-location-dot"></i> Whitefield
+            </li>
+            <li onclick="selectLocation('Electronic City, Bangalore')"><i class="fa-solid fa-location-dot"></i>
+              Electronic City</li>
+            <li onclick="selectLocation('JP Nagar, Bangalore')"><i class="fa-solid fa-location-dot"></i> JP Nagar</li>
+            <li onclick="selectLocation('Jayanagar, Bangalore')"><i class="fa-solid fa-location-dot"></i> Jayanagar</li>
+            <li onclick="selectLocation('Marathahalli, Bangalore')"><i class="fa-solid fa-location-dot"></i>
+              Marathahalli</li>
+            <li onclick="selectLocation('HSR Layout, Bangalore')"><i class="fa-solid fa-location-dot"></i> HSR Layout
+            </li>
+            <li onclick="selectLocation('BTM Layout, Bangalore')"><i class="fa-solid fa-location-dot"></i> BTM Layout
+            </li>
+            <li onclick="selectLocation('Hebbal, Bangalore')"><i class="fa-solid fa-location-dot"></i> Hebbal</li>
+          </ul>
+          <button class="btn w-100" style="justify-content:center;margin-top:14px;" onclick="useCurrentLocation()">
+            <i class="fa-solid fa-location-arrow"></i> Use Current Location
+          </button>
+        </div>
+      </div>
+
+      <!-- Nav Links -->
+      <div class="nav-links">
+        <a href="{% url 'home' %}">Home</a>
+        <a href="{% url 'about' %}">About</a>
+        <a href="{% url 'products' %}">Products</a>
+        <a href="{% url 'contact' %}">Contact</a>
+        {% if user.is_authenticated %}
+        <a href="{% url 'account' %}">My Account</a>
+        {% endif %}
+      </div>
+
+      <!-- Icons & Search -->
+      <div class="nav-icons">
+        <form class="search-bar" action="{% url 'search' %}" method="GET">
+          <input type="text" name="q" placeholder="Search groceries..." value="{{ request.GET.q|default:'' }}">
+          <button type="submit"><i class="fa-solid fa-magnifying-glass"></i></button>
+        </form>
+
+        <!-- Wishlist -->
+        <a href="{% url 'wishlist' %}" class="nav-icon-btn" title="Wishlist">
+          <i class="fa-regular fa-heart"></i>
+          {% if wishlist_count > 0 %}<span class="badge">{{ wishlist_count }}</span>{% endif %}
+        </a>
+
+        <!-- Cart -->
+        <a href="{% url 'cart' %}" class="nav-icon-btn" title="Cart">
+          <i class="fa-solid fa-cart-shopping"></i>
+          {% if cart_count > 0 %}<span class="badge">{{ cart_count }}</span>{% endif %}
+        </a>
+
+        <!-- Auth -->
+        <div class="nav-auth">
+          {% if user.is_authenticated %}
+          <a href="{% url 'account' %}" class="btn-login" title="Account">
+            <i class="fa-solid fa-user"></i> {{ user.first_name|default:user.username }}
+          </a>
+          <a href="{% url 'logout' %}" class="btn-register" title="Logout">
+            <i class="fa-solid fa-right-from-bracket"></i> Logout
+          </a>
+          {% else %}
+          <a href="{% url 'login' %}" class="btn-login">Login</a>
+          <a href="{% url 'register' %}" class="btn-register">Register</a>
+          {% endif %}
+        </div>
+
+        <!-- Mobile menu button -->
+        <button class="menu-btn" id="menuBtn" aria-label="Toggle Menu">
+          <i class="fa-solid fa-bars"></i>
+        </button>
+      </div>
+
+    </div>
+  </nav>
+
+  <!-- ══ PAGE CONTENT ══ -->
+  {% block content %}{% endblock %}
+
+  <!-- ══ FOOTER ══ -->
+  <footer class="footer">
+    <div class="container">
+      <div class="grid grid-4">
+        <div class="footer-col">
+          <h3>🛒 Grocery Online</h3>
+          <p>Fresh and healthy groceries delivered directly to your doorstep. Quality you can trust.</p>
+        </div>
+        <div class="footer-col">
+          <h3>Quick Links</h3>
+          <ul>
+            <li><a href="{% url 'home' %}"><i class="fa fa-chevron-right"></i> Home</a></li>
+            <li><a href="{% url 'about' %}"><i class="fa fa-chevron-right"></i> About</a></li>
+            <li><a href="{% url 'products' %}"><i class="fa fa-chevron-right"></i> Products</a></li>
+            <li><a href="{% url 'contact' %}"><i class="fa fa-chevron-right"></i> Contact</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h3>Customer Service</h3>
+          <ul>
+            <li><a href="{% url 'account' %}"><i class="fa fa-chevron-right"></i> My Account</a></li>
+            <li><a href="{% url 'orders' %}"><i class="fa fa-chevron-right"></i> Orders</a></li>
+            <li><a href="{% url 'wishlist' %}"><i class="fa fa-chevron-right"></i> Wishlist</a></li>
+            <li><a href="{% url 'contact' %}"><i class="fa fa-chevron-right"></i> Help Center</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h3>Contact Us</h3>
+          <p><i class="fa fa-map-marker-alt" style="color:var(--primary);margin-right:8px;"></i> {{ contact_address }}
+          </p>
+          <p><i class="fa fa-phone" style="color:var(--primary);margin-right:8px;"></i> {{ contact_phone }}</p>
+          <p><i class="fa fa-envelope" style="color:var(--primary);margin-right:8px;"></i> {{ contact_email }}</p>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>© 2026 Grocery Online. All Rights Reserved. Made with ❤️ in India</p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Main JS -->
+  <script src="{% static 'home/js/script.js' %}"></script>
+
+  <!-- Location Dropdown Script -->
+  <script>
+    function toggleLocationDropdown() {
+      var dropdown = document.getElementById('locationDropdown');
+      var wrapper = document.getElementById('deliveryWrapper');
+      dropdown.classList.toggle('open');
+      wrapper.classList.toggle('active');
+      if (dropdown.classList.contains('open')) {
+        document.getElementById('locationInput').focus();
+      }
+    }
+
+    function selectLocation(name) {
+      document.getElementById('selectedLocation').textContent = name;
+      document.getElementById('locationDropdown').classList.remove('open');
+      document.getElementById('deliveryWrapper').classList.remove('active');
+    }
+
+    function useCurrentLocation() {
+      if (navigator.geolocation) {
+        navigator.geolocation.getCurrentPosition(function (pos) {
+          document.getElementById('selectedLocation').textContent = 'Current Location';
+          document.getElementById('locationDropdown').classList.remove('open');
+          document.getElementById('deliveryWrapper').classList.remove('active');
+        }, function () {
+          document.getElementById('selectedLocation').textContent = 'Hyderabad, Telangana';
+          document.getElementById('locationDropdown').classList.remove('open');
+          document.getElementById('deliveryWrapper').classList.remove('active');
+        });
+      }
+    }
+
+    function filterLocations(val) {
+      var items = document.querySelectorAll('#locationList li');
+      items.forEach(function (item) {
+        item.style.display = item.textContent.toLowerCase().includes(val.toLowerCase()) ? '' : 'none';
+      });
+    }
+
+    // Close dropdown when clicking outside
+    document.addEventListener('click', function (e) {
+      var wrapper = document.getElementById('deliveryWrapper');
+      if (wrapper && !wrapper.contains(e.target)) {
+        document.getElementById('locationDropdown').classList.remove('open');
+        wrapper.classList.remove('active');
+      }
+    });
+  </script>
+
+  {% block extra_js %}{% endblock %}
+</body>
+
+</html>

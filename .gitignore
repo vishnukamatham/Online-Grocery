@@ -1,0 +1,8 @@
+.env
+db.sqlite3
+__pycache__/
+*.pyc
+export/*.xlsx
+media/
+staticfiles/
+scratch/

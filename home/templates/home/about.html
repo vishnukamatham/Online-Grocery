@@ -1,0 +1,82 @@
+{% extends 'home/base.html' %}
+{% load static %}
+
+{% block title %}About Us — Grocery Online{% endblock %}
+
+{% block content %}
+<!-- About Hero -->
+<div class="about-hero">
+  <div class="container">
+    <h1>🌿 About Grocery Online</h1>
+    <p>We are passionate about bringing the freshest organic groceries straight from the farm to your family's table.</p>
+  </div>
+</div>
+
+<!-- Mission Section -->
+<section class="section">
+  <div class="container">
+    <div class="grid grid-2" style="align-items:center;gap:60px;">
+      <div>
+        <h2 style="font-family:var(--font-heading);font-size:2rem;font-weight:800;color:var(--secondary);margin-bottom:20px;">
+          Our <span style="color:var(--primary);">Mission</span>
+        </h2>
+        <p style="color:var(--text-muted);line-height:1.9;margin-bottom:16px;">
+          At Grocery Online, our mission is simple: to make fresh, healthy, and organic food accessible to everyone. 
+          We work directly with local farmers to ensure the highest quality produce reaches your doorstep.
+        </p>
+        <p style="color:var(--text-muted);line-height:1.9;">
+          We believe every family deserves access to fresh food without the hassle of visiting crowded markets. 
+          Our platform makes it easy to shop, pay, and receive fresh groceries within hours.
+        </p>
+        <div style="display:flex;gap:24px;margin-top:28px;">
+          <div style="text-align:center;">
+            <div style="font-family:var(--font-heading);font-size:2rem;font-weight:800;color:var(--primary);">500+</div>
+            <div style="font-size:0.88rem;color:var(--text-muted);">Products</div>
+          </div>
+          <div style="text-align:center;">
+            <div style="font-family:var(--font-heading);font-size:2rem;font-weight:800;color:var(--primary);">10k+</div>
+            <div style="font-size:0.88rem;color:var(--text-muted);">Customers</div>
+          </div>
+          <div style="text-align:center;">
+            <div style="font-family:var(--font-heading);font-size:2rem;font-weight:800;color:var(--primary);">50+</div>
+            <div style="font-size:0.88rem;color:var(--text-muted);">Farm Partners</div>
+          </div>
+        </div>
+      </div>
+      <div>
+        <img src="{% static 'home/images/fruit-basket.png' %}" alt="Our Mission" style="max-width:420px;margin:0 auto;filter:drop-shadow(0 20px 40px rgba(255,107,53,0.2));">
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Values Section -->
+<section class="section bg-light">
+  <div class="container">
+    <h2 class="section-title">Why Choose Us?</h2>
+    <div class="grid grid-4">
+      <div class="card value-card">
+        <span class="value-icon">🌱</span>
+        <h3>Farm Fresh</h3>
+        <p>Products sourced directly from certified organic farms, harvested fresh every day.</p>
+      </div>
+      <div class="card value-card">
+        <span class="value-icon">⚡</span>
+        <h3>Same-Day Delivery</h3>
+        <p>Order before noon and get your groceries delivered the same evening.</p>
+      </div>
+      <div class="card value-card">
+        <span class="value-icon">💰</span>
+        <h3>Best Prices</h3>
+        <p>We guarantee the best prices on all products with no hidden fees.</p>
+      </div>
+      <div class="card value-card">
+        <span class="value-icon">♻️</span>
+        <h3>Eco-Friendly</h3>
+        <p>All our packaging is 100% biodegradable. We care about the planet.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+{% endblock %}

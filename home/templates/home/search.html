@@ -1,0 +1,68 @@
+{% extends 'home/base.html' %}
+
+{% block title %}Search: {{ query }} — Grocery Online{% endblock %}
+
+{% block content %}
+<div class="page-header">
+  <div class="container">
+    <h1><i class="fa-solid fa-magnifying-glass"></i> Search Results</h1>
+    {% if query %}
+    <p>Results for "<strong>{{ query }}</strong>" — {{ products.count }} product(s) found</p>
+    {% endif %}
+  </div>
+</div>
+
+<div class="page-section">
+  <div class="container">
+
+    <!-- Search Form -->
+    <form action="{% url 'search' %}" method="GET" style="display:flex;gap:12px;margin-bottom:40px;max-width:500px;">
+      <input type="text" name="q" class="form-control" placeholder="Search products..." value="{{ query }}">
+      <button type="submit" class="btn" style="flex-shrink:0;"><i class="fa-solid fa-magnifying-glass"></i> Search</button>
+    </form>
+
+    {% if query %}
+      {% if products %}
+      <div class="grid grid-4">
+        {% for product in products %}
+        <div class="card product-card">
+          <a href="{% url 'product_detail' product.pk %}">
+            <div class="product-img">
+              <img src="{{ product.get_image_url }}" alt="{{ product.name }}">
+            </div>
+          </a>
+          <div class="product-info">
+            <h3><a href="{% url 'product_detail' product.pk %}" style="color:var(--secondary);">{{ product.name }}</a></h3>
+            <div class="rating"><i class="fa-solid fa-star"></i> {{ product.rating }}</div>
+            <div class="price">₹{{ product.price }}</div>
+            <div class="product-actions">
+              {% if user.is_authenticated %}
+              <a href="{% url 'add_to_wishlist' product.pk %}" class="btn-icon"><i class="fa-regular fa-heart"></i></a>
+              <a href="{% url 'add_to_cart' product.pk %}" class="btn-small"><i class="fa fa-cart-plus"></i> Add</a>
+              {% else %}
+              <a href="{% url 'login' %}" class="btn-small">Buy Now</a>
+              {% endif %}
+            </div>
+          </div>
+        </div>
+        {% endfor %}
+      </div>
+      {% else %}
+      <div class="empty-state">
+        <div class="icon">🔍</div>
+        <h3>No Results Found</h3>
+        <p>We couldn't find "<strong>{{ query }}</strong>". Try a different search term.</p>
+        <a href="{% url 'products' %}" class="btn" style="margin-top:16px;">Browse All Products</a>
+      </div>
+      {% endif %}
+    {% else %}
+    <div class="empty-state">
+      <div class="icon">🛒</div>
+      <h3>Start Searching</h3>
+      <p>Type a product name above to find what you're looking for.</p>
+    </div>
+    {% endif %}
+
+  </div>
+</div>
+{% endblock %}

@@ -1,0 +1,225 @@
+{% extends 'home/base.html' %}
+
+{% block title %}My Account — Grocery Online{% endblock %}
+
+{% block content %}
+<div class="page-header">
+  <div class="container">
+    <h1><i class="fa fa-user-circle"></i> My Account</h1>
+    <p>Manage your account and view your activity</p>
+  </div>
+</div>
+
+<div class="page-section">
+  <div class="container">
+    <div class="account-grid">
+
+      <!-- Sidebar -->
+      <div class="account-sidebar">
+        <div class="account-avatar">
+          {{ user.first_name|first|upper }}{% if user.last_name %}{{ user.last_name|first|upper }}{% endif %}
+        </div>
+        <div class="account-name">{{ user.get_full_name|default:user.username }}</div>
+        <div class="account-email">{{ user.email }}</div>
+        <ul class="account-menu">
+          <li><a href="#" class="active" id="dashboard-tab-link"><i class="fa fa-tachometer-alt"></i> Dashboard</a></li>
+          <li><a href="#" id="edit-profile-tab-link"><i class="fa fa-user-edit"></i> Edit Profile</a></li>
+          <li><a href="#" id="change-password-tab-link"><i class="fa fa-key"></i> Change Password</a></li>
+          <li><a href="{% url 'orders' %}"><i class="fa fa-box"></i> My Orders</a></li>
+          <li><a href="{% url 'wishlist' %}"><i class="fa fa-heart"></i> My Wishlist</a></li>
+          <li><a href="{% url 'cart' %}"><i class="fa fa-shopping-cart"></i> My Cart</a></li>
+          <li><a href="{% url 'logout' %}"><i class="fa fa-sign-out-alt"></i> Logout</a></li>
+        </ul>
+      </div>
+
+      <!-- Main Content -->
+      <div>
+
+        <!-- ── TAB 1: DASHBOARD ── -->
+        <div id="dashboard-tab-content">
+          <!-- Stats -->
+          <div class="stats-row">
+            <div class="stat-card">
+              <div class="stat-num">{{ user_orders.count }}</div>
+              <div class="stat-label">Orders</div>
+            </div>
+            <div class="stat-card">
+              <div class="stat-num">{{ wishlist_items.count }}</div>
+              <div class="stat-label">Wishlist</div>
+            </div>
+            <div class="stat-card">
+              <div class="stat-num">{{ cart_items.count }}</div>
+              <div class="stat-label">Cart</div>
+            </div>
+          </div>
+
+          <!-- Recent Orders -->
+          <div class="card" style="padding:28px;margin-bottom:24px;">
+            <h3 style="font-family:var(--font-heading);font-weight:700;color:var(--secondary);margin-bottom:20px;display:flex;justify-content:space-between;align-items:center;">
+              <span><i class="fa fa-box" style="color:var(--primary);"></i> Recent Orders</span>
+              <a href="{% url 'orders' %}" style="color:var(--primary);font-size:0.88rem;font-weight:600;">View All</a>
+            </h3>
+            {% if user_orders %}
+              {% for order in user_orders %}
+              <div style="display:flex;justify-content:space-between;align-items:center;padding:14px 0;border-bottom:1px solid var(--gray-light);">
+                <div>
+                  <div style="font-weight:600;color:var(--secondary);">Order #{{ order.id }}</div>
+                  <div style="font-size:0.82rem;color:var(--text-muted);">{{ order.created_at|date:"d M Y" }}</div>
+                </div>
+                <div style="display:flex;gap:12px;align-items:center;">
+                  <span style="font-weight:700;color:var(--primary);">₹{{ order.total_amount }}</span>
+                  <span class="status-badge status-{{ order.status }}">{{ order.get_status_display }}</span>
+                  <a href="{% url 'order_detail' order.pk %}" style="color:var(--primary);font-size:0.88rem;"><i class="fa fa-eye"></i></a>
+                </div>
+              </div>
+              {% endfor %}
+            {% else %}
+            <p style="color:var(--text-muted);text-align:center;padding:20px 0;">
+              No orders yet. <a href="{% url 'products' %}" style="color:var(--primary);">Start Shopping!</a>
+            </p>
+            {% endif %}
+          </div>
+
+          <!-- Wishlist Preview -->
+          <div class="card" style="padding:28px;">
+            <h3 style="font-family:var(--font-heading);font-weight:700;color:var(--secondary);margin-bottom:20px;display:flex;justify-content:space-between;align-items:center;">
+              <span><i class="fa fa-heart" style="color:var(--primary);"></i> My Wishlist</span>
+              <a href="{% url 'wishlist' %}" style="color:var(--primary);font-size:0.88rem;font-weight:600;">View All</a>
+            </h3>
+            {% if wishlist_items %}
+            <div class="grid" style="grid-template-columns:repeat(4,1fr);gap:16px;">
+              {% for item in wishlist_items %}
+              <div style="text-align:center;">
+                <img src="{{ item.product.get_image_url }}" alt="{{ item.product.name }}" style="width:100%;height:80px;object-fit:cover;border-radius:var(--radius-sm);margin-bottom:8px;">
+                <div style="font-size:0.82rem;font-weight:600;color:var(--secondary);">{{ item.product.name }}</div>
+                <div style="color:var(--primary);font-weight:700;font-size:0.9rem;">₹{{ item.product.price }}</div>
+              </div>
+              {% endfor %}
+            </div>
+            {% else %}
+            <p style="color:var(--text-muted);text-align:center;padding:20px 0;">
+              Your wishlist is empty. <a href="{% url 'products' %}" style="color:var(--primary);">Explore products!</a>
+            </p>
+            {% endif %}
+          </div>
+        </div>
+
+        <!-- ── TAB 2: EDIT PROFILE ── -->
+        <div class="card" style="padding:28px;display:none;" id="edit-profile-tab-content">
+          <h3 style="font-family:var(--font-heading);font-weight:700;color:var(--secondary);margin-bottom:20px;">
+            <span><i class="fa fa-user-edit" style="color:var(--primary);"></i> Edit Profile Details</span>
+          </h3>
+          <form method="POST" action="{% url 'account' %}#edit-profile">
+            {% csrf_token %}
+            <input type="hidden" name="action" value="update_profile">
+            
+            <div class="form-row" style="display:flex;gap:16px;margin-bottom:16px;">
+              <div class="form-group" style="flex:1;">
+                <label for="first_name" style="display:block;margin-bottom:6px;font-weight:600;font-size:0.88rem;">First Name *</label>
+                <input type="text" id="first_name" name="first_name" class="form-control" style="width:100%;" value="{{ user.first_name }}" required>
+              </div>
+              <div class="form-group" style="flex:1;">
+                <label for="last_name" style="display:block;margin-bottom:6px;font-weight:600;font-size:0.88rem;">Last Name</label>
+                <input type="text" id="last_name" name="last_name" class="form-control" style="width:100%;" value="{{ user.last_name }}">
+              </div>
+            </div>
+            
+            <div class="form-group" style="margin-bottom:20px;">
+              <label for="email" style="display:block;margin-bottom:6px;font-weight:600;font-size:0.88rem;">Email Address *</label>
+              <input type="email" id="email" name="email" class="form-control" style="width:100%;" value="{{ user.email }}" required>
+            </div>
+            
+            <button type="submit" class="btn" style="padding:12px 24px;display:inline-flex;align-items:center;gap:8px;">
+              <i class="fa fa-save"></i> Save Changes
+            </button>
+          </form>
+        </div>
+
+        <!-- ── TAB 3: CHANGE PASSWORD ── -->
+        <div class="card" style="padding:28px;display:none;" id="change-password-tab-content">
+          <h3 style="font-family:var(--font-heading);font-weight:700;color:var(--secondary);margin-bottom:20px;">
+            <span><i class="fa fa-key" style="color:var(--primary);"></i> Change Password</span>
+          </h3>
+          <form method="POST" action="{% url 'account' %}#change-password">
+            {% csrf_token %}
+            <input type="hidden" name="action" value="change_password">
+            
+            <div class="form-group" style="margin-bottom:16px;">
+              <label for="current_password" style="display:block;margin-bottom:6px;font-weight:600;font-size:0.88rem;">Current Password *</label>
+              <input type="password" id="current_password" name="current_password" class="form-control" style="width:100%;" required>
+            </div>
+            
+            <div class="form-group" style="margin-bottom:16px;">
+              <label for="new_password" style="display:block;margin-bottom:6px;font-weight:600;font-size:0.88rem;">New Password *</label>
+              <input type="password" id="new_password" name="new_password" class="form-control" style="width:100%;" placeholder="Min. 8 characters" required>
+            </div>
+            
+            <div class="form-group" style="margin-bottom:20px;">
+              <label for="confirm_password" style="display:block;margin-bottom:6px;font-weight:600;font-size:0.88rem;">Confirm New Password *</label>
+              <input type="password" id="confirm_password" name="confirm_password" class="form-control" style="width:100%;" required>
+            </div>
+            
+            <button type="submit" class="btn" style="padding:12px 24px;display:inline-flex;align-items:center;gap:8px;">
+              <i class="fa fa-check-circle"></i> Update Password
+            </button>
+          </form>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</div>
+
+{% block extra_js %}
+<script>
+  // Tab-switching controls
+  const dashboardLink = document.getElementById('dashboard-tab-link');
+  const editProfileLink = document.getElementById('edit-profile-tab-link');
+  const changePasswordLink = document.getElementById('change-password-tab-link');
+
+  const dashboardContent = document.getElementById('dashboard-tab-content');
+  const editProfileContent = document.getElementById('edit-profile-tab-content');
+  const changePasswordContent = document.getElementById('change-password-tab-content');
+
+  function switchTab(activeLink, activeContent) {
+    dashboardContent.style.display = 'none';
+    editProfileContent.style.display = 'none';
+    changePasswordContent.style.display = 'none';
+
+    dashboardLink.classList.remove('active');
+    editProfileLink.classList.remove('active');
+    changePasswordLink.classList.remove('active');
+
+    activeContent.style.display = 'block';
+    activeLink.classList.add('active');
+  }
+
+  dashboardLink.addEventListener('click', function(e) {
+    e.preventDefault();
+    window.location.hash = '';
+    switchTab(dashboardLink, dashboardContent);
+  });
+
+  editProfileLink.addEventListener('click', function(e) {
+    e.preventDefault();
+    window.location.hash = '#edit-profile';
+    switchTab(editProfileLink, editProfileContent);
+  });
+
+  changePasswordLink.addEventListener('click', function(e) {
+    e.preventDefault();
+    window.location.hash = '#change-password';
+    switchTab(changePasswordLink, changePasswordContent);
+  });
+
+  // Handle direct hash navigation
+  window.addEventListener('load', function() {
+    if (window.location.hash === '#edit-profile') {
+      switchTab(editProfileLink, editProfileContent);
+    } else if (window.location.hash === '#change-password') {
+      switchTab(changePasswordLink, changePasswordContent);
+    }
+  });
+</script>
+{% endblock %}
+{% endblock %}
