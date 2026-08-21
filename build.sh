@@ -13,3 +13,7 @@ python manage.py migrate
 
 # Load initial products and categories
 python manage.py loaddata products_fixture.json
+
+# Ensure admin and vishnu superusers are created/reset with correct credentials
+python create_admin.py
+
