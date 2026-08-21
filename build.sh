@@ -10,3 +10,6 @@ python manage.py collectstatic --no-input
 
 # Run database migrations
 python manage.py migrate
+
+# Load initial products and categories
+python manage.py loaddata products_fixture.json

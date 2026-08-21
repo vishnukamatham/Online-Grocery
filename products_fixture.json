@@ -1,0 +1,1058 @@
+[
+{
+  "model": "home.category",
+  "pk": 1,
+  "fields": {
+    "name": "Fruits & Veggies",
+    "description": "Farm-fresh organic produce delivered daily to your doorstep.",
+    "image": "",
+    "slug": "fruits-veggies"
+  }
+},
+{
+  "model": "home.category",
+  "pk": 2,
+  "fields": {
+    "name": "Dairy & Eggs",
+    "description": "Fresh dairy products, local farm milk, premium cheese, and free-range eggs.",
+    "image": "",
+    "slug": "dairy-eggs"
+  }
+},
+{
+  "model": "home.category",
+  "pk": 3,
+  "fields": {
+    "name": "Meat & Seafood",
+    "description": "Premium cuts of chicken, lamb, fresh catch fish, and shellfish.",
+    "image": "",
+    "slug": "meat-seafood"
+  }
+},
+{
+  "model": "home.category",
+  "pk": 4,
+  "fields": {
+    "name": "Bakery & Bread",
+    "description": "Freshly baked artisanal breads, morning croissants, and breakfast bagels.",
+    "image": "",
+    "slug": "bakery-bread"
+  }
+},
+{
+  "model": "home.category",
+  "pk": 5,
+  "fields": {
+    "name": "Beverages",
+    "description": "Refreshing cold drinks, natural juices, tea, and organic ground coffee.",
+    "image": "",
+    "slug": "beverages"
+  }
+},
+{
+  "model": "home.category",
+  "pk": 6,
+  "fields": {
+    "name": "Snacks & Munchies",
+    "description": "Crispy potato chips, healthy mixed nuts, crackers, and granola bars.",
+    "image": "",
+    "slug": "snacks-munchies"
+  }
+},
+{
+  "model": "home.category",
+  "pk": 7,
+  "fields": {
+    "name": "Pantry Staples",
+    "description": "Extra virgin olive oil, fine basmati rice, organic honey, pasta, and sauces.",
+    "image": "",
+    "slug": "pantry-staples"
+  }
+},
+{
+  "model": "home.category",
+  "pk": 8,
+  "fields": {
+    "name": "Sweets & Desserts",
+    "description": "Indulgent gourmet chocolates, creamy vanilla ice cream, and bakery treats.",
+    "image": "",
+    "slug": "sweets-desserts"
+  }
+},
+{
+  "model": "home.product",
+  "pk": 1,
+  "fields": {
+    "name": "Fresh Milk",
+    "category": 2,
+    "description": "Full cream fresh milk from organic farms. Rich in calcium and vitamins.",
+    "price": "37.83",
+    "image": "",
+    "rating": "4.8",
+    "stock": 50,
+    "is_featured": true,
+    "created_at": "2026-08-09T18:55:20.593Z",
+    "updated_at": "2026-08-18T06:19:18.547Z"
+  }
+},
+{
+  "model": "home.product",
+  "pk": 2,
+  "fields": {
+    "name": "Paneer",
+    "category": 2,
+    "description": "Freshly made paneer, soft and rich. Perfect for curries and snacks.",
+    "price": "65.76",
+    "image": "",
+    "rating": "4.9",
+    "stock": 30,
+    "is_featured": true,
+    "created_at": "2026-08-09T18:55:20.599Z",
+    "updated_at": "2026-08-18T06:18:29.237Z"
+  }
+},
+{
+  "model": "home.product",
+  "pk": 3,
+  "fields": {
+    "name": "Fresh Eggs (12 pcs)",
+    "category": 2,
+    "description": "Farm fresh eggs from free-range hens. Packed with protein.",
+    "price": "96.00",
+    "image": "",
+    "rating": "4.7",
+    "stock": 80,
+    "is_featured": true,
+    "created_at": "2026-08-09T18:55:20.604Z",
+    "updated_at": "2026-08-18T06:18:29.237Z"
+  }
+},
+{
+  "model": "home.product",
+  "pk": 4,
+  "fields": {
+    "name": "Organic Apples",
+    "category": 1,
+    "description": "Sweet and crispy organic apples. Freshly picked from hill orchards.",
+    "price": "5.00",
+    "image": "",
+    "rating": "4.9",
+    "stock": 40,
+    "is_featured": true,
+    "created_at": "2026-08-09T18:55:20.608Z",
+    "updated_at": "2026-08-09T18:55:20.609Z"
+  }
+},
+{
+  "model": "home.product",
+  "pk": 5,
+  "fields": {
+    "name": "Broccoli",
+    "category": 1,
+    "description": "Fresh green broccoli, high in vitamins C and K. Great for health.",
+    "price": "2.80",
+    "image": "",
+    "rating": "4.6",
+    "stock": 25,
+    "is_featured": false,
+    "created_at": "2026-08-09T18:55:20.614Z",
+    "updated_at": "2026-08-09T18:55:20.614Z"
+  }
+},
+{
+  "model": "home.product",
+  "pk": 6,
+  "fields": {
+    "name": "Carrots (1 kg)",
+    "category": 1,
+    "description": "Fresh organic carrots, perfect for cooking and salads.",
+    "price": "1.50",
+    "image": "",
+    "rating": "4.5",
+    "stock": 60,
+    "is_featured": false,
+    "created_at": "2026-08-09T18:55:20.619Z",
+    "updated_at": "2026-08-09T18:55:20.619Z"
+  }
+},
+{
+  "model": "home.product",
+  "pk": 7,
+  "fields": {
+    "name": "Chicken Breast",
+    "category": 3,
+    "description": "Tender boneless chicken breast, antibiotic-free and fresh.",
+    "price": "8.00",
+    "image": "",
+    "rating": "4.7",
+    "stock": 20,
+    "is_featured": false,
+    "created_at": "2026-08-09T18:55:20.623Z",
+    "updated_at": "2026-08-09T18:55:20.623Z"
+  }
+},
+{
+  "model": "home.product",
+  "pk": 8,
+  "fields": {
+    "name": "Salmon Fillet",
+    "category": 3,
+    "description": "Wild-caught salmon fillet, rich in omega-3. Delivered fresh daily.",
+    "price": "12.00",
+    "image": "",
+    "rating": "4.8",
+    "stock": 14,
+    "is_featured": true,
+    "created_at": "2026-08-09T18:55:20.628Z",
+    "updated_at": "2026-08-11T06:05:57.179Z"
+  }
+},
+{
+  "model": "home.product",
+  "pk": 9,
+  "fields": {
+    "name": "Whole Wheat Bread",
+    "category": 4,
+    "description": "Freshly baked whole wheat bread. High fiber, no preservatives.",
+    "price": "49.70",
+    "image": "",
+    "rating": "4.4",
+    "stock": 35,
+    "is_featured": false,
+    "created_at": "2026-08-09T18:55:20.634Z",
+    "updated_at": "2026-08-18T06:18:29.236Z"
+  }
+},
+{
+  "model": "home.product",
+  "pk": 10,
+  "fields": {
+    "name": "Butter (200g)",
+    "category": 2,
+    "description": "Pure unsalted butter made from fresh cream.",
+    "price": "64.58",
+    "image": "",
+    "rating": "4.6",
+    "stock": 44,
+    "is_featured": false,
+    "created_at": "2026-08-09T18:55:20.639Z",
+    "updated_at": "2026-08-18T06:18:29.236Z"
+  }
+},
+{
+  "model": "home.product",
+  "pk": 11,
+  "fields": {
+    "name": "Tomatoes (1kg)",
+    "category": 1,
+    "description": "Ripe, juicy tomatoes grown without pesticides.",
+    "price": "49.36",
+    "image": "",
+    "rating": "4.5",
+    "stock": 55,
+    "is_featured": false,
+    "created_at": "2026-08-09T18:55:20.644Z",
+    "updated_at": "2026-08-18T06:18:29.235Z"
+  }
+},
+{
+  "model": "home.product",
+  "pk": 12,
+  "fields": {
+    "name": "Greek Yogurt",
+    "category": 2,
+    "description": "Thick and creamy Greek yogurt. Rich in protein and probiotics.",
+    "price": "29.85",
+    "image": "",
+    "rating": "4.7",
+    "stock": 27,
+    "is_featured": true,
+    "created_at": "2026-08-09T18:55:20.651Z",
+    "updated_at": "2026-08-18T06:18:29.235Z"
+  }
+},
+{
+  "model": "home.product",
+  "pk": 13,
+  "fields": {
+    "name": "Spinach (250g)",
+    "category": 1,
+    "description": "Fresh baby spinach leaves, rich in iron and vitamins. Perfect for salads and cooking.",
+    "price": "20.50",
+    "image": "",
+    "rating": "4.5",
+    "stock": 39,
+    "is_featured": false,
+    "created_at": "2026-08-09T19:13:33.641Z",
+    "updated_at": "2026-08-18T06:18:29.234Z"
+  }
+},
+{
+  "model": "home.product",
+  "pk": 14,
+  "fields": {
+    "name": "Banana (6 pcs)",
+    "category": 1,
+    "description": "Sweet ripe bananas, great source of potassium and energy. Pack of 6.",
+    "price": "31.21",
+    "image": "",
+    "rating": "4.7",
+    "stock": 60,
+    "is_featured": true,
+    "created_at": "2026-08-09T19:13:33.648Z",
+    "updated_at": "2026-08-18T06:18:29.234Z"
+  }
+},
+{
+  "model": "home.product",
+  "pk": 15,
+  "fields": {
+    "name": "Mango",
+    "category": 1,
+    "description": "Juicy Alphonso mangoes, the king of fruits. Sweet, aromatic, and irresistible.",
+    "price": "69.60",
+    "image": "",
+    "rating": "4.9",
+    "stock": 35,
+    "is_featured": true,
+    "created_at": "2026-08-09T19:13:33.655Z",
+    "updated_at": "2026-08-18T06:18:29.233Z"
+  }
+},
+{
+  "model": "home.product",
+  "pk": 16,
+  "fields": {
+    "name": "Onion (1kg)",
+    "category": 1,
+    "description": "Fresh red onions, essential for Indian cooking. Sourced from local farms.",
+    "price": "69.91",
+    "image": "",
+    "rating": "4.4",
+    "stock": 80,
+    "is_featured": false,
+    "created_at": "2026-08-09T19:13:33.660Z",
+    "updated_at": "2026-08-18T06:18:29.233Z"
+  }
+},
+{
+  "model": "home.product",
+  "pk": 17,
+  "fields": {
+    "name": "Garlic",
+    "category": 1,
+    "description": "Fresh garlic bulbs with strong aroma. Great for cooking curries and pastes.",
+    "price": "50.00",
+    "image": "",
+    "rating": "4.6",
+    "stock": 70,
+    "is_featured": false,
+    "created_at": "2026-08-09T19:13:33.668Z",
+    "updated_at": "2026-08-18T06:18:29.232Z"
+  }
+},
+{
+  "model": "home.product",
+  "pk": 18,
+  "fields": {
+    "name": "Potato (1kg)",
+    "category": 1,
+    "description": "Fresh potatoes, versatile and filling. Perfect for fries, curries, and more.",
+    "price": "49.33",
+    "image": "",
+    "rating": "4.5",
+    "stock": 89,
+    "is_featured": false,
+    "created_at": "2026-08-09T19:13:33.675Z",
+    "updated_at": "2026-08-18T06:18:29.232Z"
+  }
+},
+{
+  "model": "home.product",
+  "pk": 19,
+  "fields": {
+    "name": "Cucumber",
+    "category": 1,
+    "description": "Fresh cooling cucumbers. Great for salads, raita, and detox water.",
+    "price": "10.00",
+    "image": "",
+    "rating": "4.4",
+    "stock": 55,
+    "is_featured": false,
+    "created_at": "2026-08-09T19:13:33.681Z",
+    "updated_at": "2026-08-18T06:18:29.231Z"
+  }
+},
+{
+  "model": "home.product",
+  "pk": 20,
+  "fields": {
+    "name": "Watermelon",
+    "category": 1,
+    "description": "Sweet juicy watermelon. Refreshing and hydrating, perfect for summer.",
+    "price": "49.86",
+    "image": "",
+    "rating": "4.8",
+    "stock": 18,
+    "is_featured": true,
+    "created_at": "2026-08-09T19:13:33.688Z",
+    "updated_at": "2026-08-18T06:18:29.230Z"
+  }
+},
+{
+  "model": "home.product",
+  "pk": 21,
+  "fields": {
+    "name": "Orange (4 pcs)",
+    "category": 1,
+    "description": "Fresh sweet oranges, packed with Vitamin C. Pack of 4 juicy oranges.",
+    "price": "14.81",
+    "image": "",
+    "rating": "4.6",
+    "stock": 44,
+    "is_featured": false,
+    "created_at": "2026-08-09T19:13:33.695Z",
+    "updated_at": "2026-08-18T06:18:29.225Z"
+  }
+},
+{
+  "model": "home.product",
+  "pk": 22,
+  "fields": {
+    "name": "Cheddar Cheese",
+    "category": 2,
+    "description": "Aged cheddar cheese block, sharp and rich flavor. Perfect for sandwiches and cooking.",
+    "price": "6.00",
+    "image": "",
+    "rating": "4.7",
+    "stock": 24,
+    "is_featured": false,
+    "created_at": "2026-08-09T19:13:33.701Z",
+    "updated_at": "2026-08-11T06:32:13.074Z"
+  }
+},
+{
+  "model": "home.product",
+  "pk": 23,
+  "fields": {
+    "name": "Prawns (500g)",
+    "category": 3,
+    "description": "Fresh tiger prawns, cleaned and deveined. Perfect for curries and grills.",
+    "price": "9.50",
+    "image": "",
+    "rating": "4.6",
+    "stock": 18,
+    "is_featured": true,
+    "created_at": "2026-08-09T19:13:33.708Z",
+    "updated_at": "2026-08-09T19:13:33.708Z"
+  }
+},
+{
+  "model": "home.product",
+  "pk": 24,
+  "fields": {
+    "name": "Croissant",
+    "category": 4,
+    "description": "Freshly baked butter croissant, flaky and golden. Made fresh every morning.",
+    "price": "1.50",
+    "image": "",
+    "rating": "4.5",
+    "stock": 30,
+    "is_featured": false,
+    "created_at": "2026-08-09T19:13:33.715Z",
+    "updated_at": "2026-08-09T19:13:33.715Z"
+  }
+},
+{
+  "model": "home.product",
+  "pk": 25,
+  "fields": {
+    "name": "Organic Bananas (1 Bunch)",
+    "category": 1,
+    "description": "Sweet and ripe organic bananas, rich in potassium.",
+    "price": "10.00",
+    "image": "",
+    "rating": "4.8",
+    "stock": 120,
+    "is_featured": true,
+    "created_at": "2026-08-11T17:06:52.944Z",
+    "updated_at": "2026-08-18T06:14:16.048Z"
+  }
+},
+{
+  "model": "home.product",
+  "pk": 26,
+  "fields": {
+    "name": "Fresh Strawberries (250g)",
+    "category": 1,
+    "description": "Plump, juicy, and hand-picked sweet strawberries.",
+    "price": "180.00",
+    "image": "",
+    "rating": "4.9",
+    "stock": 80,
+    "is_featured": true,
+    "created_at": "2026-08-11T17:06:52.954Z",
+    "updated_at": "2026-08-11T17:18:16.727Z"
+  }
+},
+{
+  "model": "home.product",
+  "pk": 27,
+  "fields": {
+    "name": "Avocados (3 Pack)",
+    "category": 1,
+    "description": "Creamy Haas avocados, perfect for guacamole or toast.",
+    "price": "299.00",
+    "image": "",
+    "rating": "4.6",
+    "stock": 65,
+    "is_featured": false,
+    "created_at": "2026-08-11T17:06:52.965Z",
+    "updated_at": "2026-08-11T17:18:16.736Z"
+  }
+},
+{
+  "model": "home.product",
+  "pk": 28,
+  "fields": {
+    "name": "Organic Baby Spinach (150g)",
+    "category": 1,
+    "description": "Pre-washed, tender organic spinach leaves.",
+    "price": "40.00",
+    "image": "",
+    "rating": "4.7",
+    "stock": 90,
+    "is_featured": false,
+    "created_at": "2026-08-11T17:06:52.974Z",
+    "updated_at": "2026-08-11T17:18:16.742Z"
+  }
+},
+{
+  "model": "home.product",
+  "pk": 29,
+  "fields": {
+    "name": "Cherry Tomatoes (200g)",
+    "category": 1,
+    "description": "Sweet and crisp organic vine-ripened cherry tomatoes.",
+    "price": "50.00",
+    "image": "",
+    "rating": "4.5",
+    "stock": 110,
+    "is_featured": false,
+    "created_at": "2026-08-11T17:06:52.984Z",
+    "updated_at": "2026-08-11T17:18:16.750Z"
+  }
+},
+{
+  "model": "home.product",
+  "pk": 30,
+  "fields": {
+    "name": "Fresh Blueberries (125g)",
+    "category": 1,
+    "description": "Antioxidant-rich fresh blueberries, sweet and tart.",
+    "price": "250.00",
+    "image": "",
+    "rating": "4.9",
+    "stock": 70,
+    "is_featured": true,
+    "created_at": "2026-08-11T17:06:52.995Z",
+    "updated_at": "2026-08-11T17:18:16.757Z"
+  }
+},
+{
+  "model": "home.product",
+  "pk": 31,
+  "fields": {
+    "name": "Organic Whole Milk (1L)",
+    "category": 2,
+    "description": "Pasteurized organic whole milk from pasture-raised cows.",
+    "price": "65.00",
+    "image": "",
+    "rating": "4.8",
+    "stock": 150,
+    "is_featured": true,
+    "created_at": "2026-08-11T17:06:53.012Z",
+    "updated_at": "2026-08-11T17:18:16.771Z"
+  }
+},
+{
+  "model": "home.product",
+  "pk": 32,
+  "fields": {
+    "name": "Greek Yogurt Plain (500g)",
+    "category": 2,
+    "description": "Thick and creamy unsweetened authentic Greek yogurt.",
+    "price": "120.00",
+    "image": "",
+    "rating": "4.7",
+    "stock": 95,
+    "is_featured": false,
+    "created_at": "2026-08-11T17:06:53.020Z",
+    "updated_at": "2026-08-11T17:18:16.780Z"
+  }
+},
+{
+  "model": "home.product",
+  "pk": 33,
+  "fields": {
+    "name": "Organic Free-Range Eggs (12 pcs)",
+    "category": 2,
+    "description": "Large, farm-fresh eggs from free-range chickens.",
+    "price": "140.00",
+    "image": "",
+    "rating": "4.9",
+    "stock": 130,
+    "is_featured": true,
+    "created_at": "2026-08-11T17:06:53.031Z",
+    "updated_at": "2026-08-11T17:18:16.787Z"
+  }
+},
+{
+  "model": "home.product",
+  "pk": 34,
+  "fields": {
+    "name": "Cheddar Cheese Block (250g)",
+    "category": 2,
+    "description": "Sharp, aged cheddar cheese block with rich flavor.",
+    "price": "240.00",
+    "image": "",
+    "rating": "4.6",
+    "stock": 85,
+    "is_featured": false,
+    "created_at": "2026-08-11T17:06:53.038Z",
+    "updated_at": "2026-08-11T17:18:16.793Z"
+  }
+},
+{
+  "model": "home.product",
+  "pk": 35,
+  "fields": {
+    "name": "Almond Milk Unsweetened (1L)",
+    "category": 2,
+    "description": "Smooth plant-based unsweetened almond beverage.",
+    "price": "199.00",
+    "image": "",
+    "rating": "4.5",
+    "stock": 75,
+    "is_featured": false,
+    "created_at": "2026-08-11T17:06:53.047Z",
+    "updated_at": "2026-08-11T17:18:16.803Z"
+  }
+},
+{
+  "model": "home.product",
+  "pk": 36,
+  "fields": {
+    "name": "Boneless Chicken Breast (500g)",
+    "category": 3,
+    "description": "Lean and tender boneless skinless chicken breasts.",
+    "price": "220.00",
+    "image": "",
+    "rating": "4.7",
+    "stock": 70,
+    "is_featured": true,
+    "created_at": "2026-08-11T17:06:53.062Z",
+    "updated_at": "2026-08-11T17:18:16.818Z"
+  }
+},
+{
+  "model": "home.product",
+  "pk": 37,
+  "fields": {
+    "name": "Fresh Salmon Fillet (250g)",
+    "category": 3,
+    "description": "Rich in Omega-3, skin-on fresh Atlantic salmon.",
+    "price": "650.00",
+    "image": "",
+    "rating": "4.9",
+    "stock": 40,
+    "is_featured": true,
+    "created_at": "2026-08-11T17:06:53.069Z",
+    "updated_at": "2026-08-11T17:18:16.825Z"
+  }
+},
+{
+  "model": "home.product",
+  "pk": 38,
+  "fields": {
+    "name": "Beef Ribeye Steak (300g)",
+    "category": 3,
+    "description": "Premium cut beef steak, well-marbled for rich flavor.",
+    "price": "12.99",
+    "image": "",
+    "rating": "4.8",
+    "stock": 35,
+    "is_featured": false,
+    "created_at": "2026-08-11T17:06:53.078Z",
+    "updated_at": "2026-08-11T17:06:53.078Z"
+  }
+},
+{
+  "model": "home.product",
+  "pk": 39,
+  "fields": {
+    "name": "Tiger Prawns (500g)",
+    "category": 3,
+    "description": "Cleaned and deveined large tiger prawns.",
+    "price": "550.00",
+    "image": "",
+    "rating": "4.6",
+    "stock": 50,
+    "is_featured": false,
+    "created_at": "2026-08-11T17:06:53.086Z",
+    "updated_at": "2026-08-11T17:18:16.852Z"
+  }
+},
+{
+  "model": "home.product",
+  "pk": 40,
+  "fields": {
+    "name": "Artisanal Sourdough Bread",
+    "category": 4,
+    "description": "Traditional crusty sourdough loaf baked fresh daily.",
+    "price": "120.00",
+    "image": "",
+    "rating": "4.9",
+    "stock": 45,
+    "is_featured": true,
+    "created_at": "2026-08-11T17:06:53.102Z",
+    "updated_at": "2026-08-11T17:18:16.867Z"
+  }
+},
+{
+  "model": "home.product",
+  "pk": 41,
+  "fields": {
+    "name": "Butter Croissants (4 Pack)",
+    "category": 4,
+    "description": "Flaky, buttery, golden French-style croissants.",
+    "price": "160.00",
+    "image": "",
+    "rating": "4.8",
+    "stock": 54,
+    "is_featured": true,
+    "created_at": "2026-08-11T17:06:53.112Z",
+    "updated_at": "2026-08-14T17:26:58.416Z"
+  }
+},
+{
+  "model": "home.product",
+  "pk": 42,
+  "fields": {
+    "name": "Blueberry Muffins (4 Pack)",
+    "category": 4,
+    "description": "Soft and moist muffins loaded with real blueberries.",
+    "price": "180.00",
+    "image": "",
+    "rating": "4.6",
+    "stock": 40,
+    "is_featured": false,
+    "created_at": "2026-08-11T17:06:53.118Z",
+    "updated_at": "2026-08-11T17:18:16.884Z"
+  }
+},
+{
+  "model": "home.product",
+  "pk": 43,
+  "fields": {
+    "name": "Soft Sesame Bagels (5 Pack)",
+    "category": 4,
+    "description": "Chewy, freshly baked bagels topped with toasted sesame.",
+    "price": "150.00",
+    "image": "",
+    "rating": "4.5",
+    "stock": 60,
+    "is_featured": false,
+    "created_at": "2026-08-11T17:06:53.129Z",
+    "updated_at": "2026-08-11T17:18:16.890Z"
+  }
+},
+{
+  "model": "home.product",
+  "pk": 44,
+  "fields": {
+    "name": "Organic Orange Juice (1L)",
+    "category": 5,
+    "description": "100% freshly squeezed organic orange juice, no added sugar.",
+    "price": "140.00",
+    "image": "",
+    "rating": "4.8",
+    "stock": 85,
+    "is_featured": true,
+    "created_at": "2026-08-11T17:06:53.147Z",
+    "updated_at": "2026-08-11T17:18:16.906Z"
+  }
+},
+{
+  "model": "home.product",
+  "pk": 45,
+  "fields": {
+    "name": "Cold Brew Coffee (330ml)",
+    "category": 5,
+    "description": "Smooth, low-acid cold brewed black coffee.",
+    "price": "120.00",
+    "image": "",
+    "rating": "4.6",
+    "stock": 100,
+    "is_featured": false,
+    "created_at": "2026-08-11T17:06:53.154Z",
+    "updated_at": "2026-08-11T17:18:16.915Z"
+  }
+},
+{
+  "model": "home.product",
+  "pk": 46,
+  "fields": {
+    "name": "Organic Green Tea (20 bags)",
+    "category": 5,
+    "description": "Pure green tea leaves in biodegradable pyramid bags.",
+    "price": "150.00",
+    "image": "",
+    "rating": "4.7",
+    "stock": 120,
+    "is_featured": false,
+    "created_at": "2026-08-11T17:06:53.164Z",
+    "updated_at": "2026-08-11T17:18:16.922Z"
+  }
+},
+{
+  "model": "home.product",
+  "pk": 47,
+  "fields": {
+    "name": "Natural Coconut Water (500ml)",
+    "category": 5,
+    "description": "Hydrating, 100% natural coconut water with electrolytes.",
+    "price": "60.00",
+    "image": "",
+    "rating": "4.9",
+    "stock": 140,
+    "is_featured": true,
+    "created_at": "2026-08-11T17:06:53.171Z",
+    "updated_at": "2026-08-11T17:18:16.927Z"
+  }
+},
+{
+  "model": "home.product",
+  "pk": 48,
+  "fields": {
+    "name": "Sea Salt Potato Chips (150g)",
+    "category": 6,
+    "description": "Crispy, kettle-cooked potato chips seasoned with sea salt.",
+    "price": "60.00",
+    "image": "",
+    "rating": "4.6",
+    "stock": 159,
+    "is_featured": true,
+    "created_at": "2026-08-11T17:06:53.188Z",
+    "updated_at": "2026-08-14T18:22:09.905Z"
+  }
+},
+{
+  "model": "home.product",
+  "pk": 49,
+  "fields": {
+    "name": "Raw Mixed Nuts (250g)",
+    "category": 6,
+    "description": "A premium healthy mix of almonds, cashews, walnuts, and pecans.",
+    "price": "350.00",
+    "image": "",
+    "rating": "4.8",
+    "stock": 89,
+    "is_featured": true,
+    "created_at": "2026-08-11T17:06:53.198Z",
+    "updated_at": "2026-08-14T18:22:09.873Z"
+  }
+},
+{
+  "model": "home.product",
+  "pk": 50,
+  "fields": {
+    "name": "Organic White Popcorn (100g)",
+    "category": 6,
+    "description": "Lightly salted, air-popped organic white corn kernels.",
+    "price": "80.00",
+    "image": "",
+    "rating": "4.4",
+    "stock": 109,
+    "is_featured": false,
+    "created_at": "2026-08-11T17:06:53.205Z",
+    "updated_at": "2026-08-14T18:22:09.886Z"
+  }
+},
+{
+  "model": "home.product",
+  "pk": 51,
+  "fields": {
+    "name": "Chocolate Granola Bars (6 Pack)",
+    "category": 6,
+    "description": "Whole grain oat bars topped with dark chocolate chips.",
+    "price": "199.00",
+    "image": "",
+    "rating": "4.5",
+    "stock": 79,
+    "is_featured": false,
+    "created_at": "2026-08-11T17:06:53.213Z",
+    "updated_at": "2026-08-14T18:22:09.895Z"
+  }
+},
+{
+  "model": "home.product",
+  "pk": 52,
+  "fields": {
+    "name": "Extra Virgin Olive Oil (500ml)",
+    "category": 7,
+    "description": "Cold-pressed extra virgin olive oil from Spain.",
+    "price": "499.00",
+    "image": "",
+    "rating": "4.9",
+    "stock": 60,
+    "is_featured": true,
+    "created_at": "2026-08-11T17:06:53.229Z",
+    "updated_at": "2026-08-11T17:18:16.977Z"
+  }
+},
+{
+  "model": "home.product",
+  "pk": 53,
+  "fields": {
+    "name": "Premium Basmati Rice (1kg)",
+    "category": 7,
+    "description": "Long-grain, aromatic aged basmati rice.",
+    "price": "120.00",
+    "image": "",
+    "rating": "4.7",
+    "stock": 99,
+    "is_featured": false,
+    "created_at": "2026-08-11T17:06:53.235Z",
+    "updated_at": "2026-08-11T17:26:16.381Z"
+  }
+},
+{
+  "model": "home.product",
+  "pk": 54,
+  "fields": {
+    "name": "Raw Organic Honey (340g)",
+    "category": 7,
+    "description": "Unfiltered, pure raw wildflower organic honey.",
+    "price": "240.00",
+    "image": "",
+    "rating": "4.9",
+    "stock": 49,
+    "is_featured": true,
+    "created_at": "2026-08-11T17:06:53.244Z",
+    "updated_at": "2026-08-14T17:26:58.396Z"
+  }
+},
+{
+  "model": "home.product",
+  "pk": 55,
+  "fields": {
+    "name": "Italian Penne Rigate (500g)",
+    "category": 7,
+    "description": "Premium durum wheat semolina dry pasta from Italy.",
+    "price": "99.00",
+    "image": "",
+    "rating": "4.8",
+    "stock": 149,
+    "is_featured": false,
+    "created_at": "2026-08-11T17:06:53.251Z",
+    "updated_at": "2026-08-11T17:26:16.368Z"
+  }
+},
+{
+  "model": "home.product",
+  "pk": 56,
+  "fields": {
+    "name": "Tomato Basil Pasta Sauce (400g)",
+    "category": 7,
+    "description": "Rich pasta sauce simmered with vine-ripened tomatoes and basil.",
+    "price": "150.00",
+    "image": "",
+    "rating": "4.6",
+    "stock": 84,
+    "is_featured": false,
+    "created_at": "2026-08-11T17:06:53.261Z",
+    "updated_at": "2026-08-11T17:26:16.353Z"
+  }
+},
+{
+  "model": "home.product",
+  "pk": 57,
+  "fields": {
+    "name": "Dark Chocolate Bar 72% (100g)",
+    "category": 8,
+    "description": "Rich Belgian dark chocolate bar with 72% cocoa content.",
+    "price": "180.00",
+    "image": "",
+    "rating": "4.9",
+    "stock": 120,
+    "is_featured": false,
+    "created_at": "2026-08-11T17:06:53.279Z",
+    "updated_at": "2026-08-14T17:15:08.431Z"
+  }
+},
+{
+  "model": "home.product",
+  "pk": 58,
+  "fields": {
+    "name": "Vanilla Bean Ice Cream (1L)",
+    "category": 8,
+    "description": "Creamy double-churned ice cream with real vanilla bean specks.",
+    "price": "220.00",
+    "image": "",
+    "rating": "4.8",
+    "stock": 45,
+    "is_featured": false,
+    "created_at": "2026-08-11T17:06:53.286Z",
+    "updated_at": "2026-08-14T17:15:08.427Z"
+  }
+},
+{
+  "model": "home.product",
+  "pk": 59,
+  "fields": {
+    "name": "Chocolate Fudge Brownie",
+    "category": 8,
+    "description": "Chewy, rich double chocolate fudge brownie.",
+    "price": "80.00",
+    "image": "",
+    "rating": "4.7",
+    "stock": 65,
+    "is_featured": false,
+    "created_at": "2026-08-11T17:06:53.297Z",
+    "updated_at": "2026-08-11T17:18:17.038Z"
+  }
+},
+{
+  "model": "home.product",
+  "pk": 60,
+  "fields": {
+    "name": "Organic Bananas (1 Dozen)",
+    "category": 1,
+    "description": "Sweet and ripe organic bananas, rich in potassium.",
+    "price": "60.00",
+    "image": "",
+    "rating": "4.8",
+    "stock": 118,
+    "is_featured": false,
+    "created_at": "2026-08-11T17:18:04.755Z",
+    "updated_at": "2026-08-14T18:37:55.647Z"
+  }
+},
+{
+  "model": "home.product",
+  "pk": 61,
+  "fields": {
+    "name": "Premium Mutton Cuts (500g)",
+    "category": 3,
+    "description": "Tender, high-quality goat mutton cuts, perfect for curry.",
+    "price": "450.00",
+    "image": "",
+    "rating": "4.8",
+    "stock": 32,
+    "is_featured": false,
+    "created_at": "2026-08-11T17:18:16.836Z",
+    "updated_at": "2026-08-18T06:44:57.781Z"
+  }
+}
+]
